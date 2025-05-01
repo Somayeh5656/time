@@ -1,20 +1,66 @@
 import "./signIn.css"
 import { RiCalendarCheckFill } from "react-icons/ri";
-
+import React, {useState} from "react";
 
 
 const SignIn = ()=>{
+    const [formData, setFormData]=useState({
+        email:"",
+        password:""
+    });
+
+
+    const handleChange= (e)=>{
+        const {name,value} =e.target;
+        setFormData(prev=>({...prev, [name]:value }));
+
+    }
+
+    const handleSubmit= async (e)=>{
+        e.preventDefault();
+
+        try{
+            const response=await fetch("http://localhost:5000/api/auth",{
+                method:"POST",
+                headers:{"content-type":"application.json"},
+                body:JSON.stringfy(formData)
+            });
+            const data=await response.json();
+
+            if(response.ok){
+                alert("Login successful")
+
+            }else{
+                alert(data.message|| "Login failed")
+
+            }
+
+        }catch(err){
+            console.error("Login error:", err);
+            alert("Something went wrong");
+
+        }
+
+    };
+
+
+
+
+
     return (
         <>
             
-            <div className="sign-in-container">
+            <div className="sign-in-container" onSubmit={handleSubmit}>
             <div className="task-icon"><RiCalendarCheckFill /> </div>
                 
                 <h1>SignIn</h1>
                 <label>Email</label>
-                <input type="text" placeholder="example@gmail.com"></input>
+                <input name="email" value={formData.email} onChange={handleChange} type="text" placeholder="example@gmail.com" required ></input>
+
+
+
                 <label>Password</label>
-                <input type="password" placeholder="*************************"></input>
+                <input name="password" value={formData.password} onChange={handleChange} type="password" placeholder="*************************"></input>
 
                 <button type="submit" className="btn sign-btn signing-page">Sign In</button>
 
