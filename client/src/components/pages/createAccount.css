@@ -1,0 +1,88 @@
+.create-account-container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 13rem;
+    padding-left: 7rem;
+    
+}
+
+
+
+
+label{
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+
+input{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+    margin-bottom: 31px; 
+    border: none;
+    border-bottom: 1.3px solid black;
+    width: 80%;
+    max-width: 674px;
+    
+
+}
+
+.account-form input[type="password"]{
+    letter-spacing: 2px;
+
+}
+
+
+.create-btn{
+margin-top: 60px;    
+cursor: pointer;
+color: white;
+background-color: black;
+border-radius: 3px;
+width: 80%;
+  
+}
+
+
+
+.link-signin{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+   
+}
+
+
+
+@media screen  and  ( max-width:500px ){
+    .create-account-container{
+        align-items: center;
+        padding-left: 0;
+    
+    }
+
+    .account-form{
+        align-items: center;
+    
+    }
+
+    .account-footer{
+        text-align: center;
+    
+    }
+
+    input{
+       width: 90%;;
+        margin-top: 1px;
+        margin-bottom: 27px;
+    }
+
+    .create-btn{
+        width: 100%;
+    }
+
+    
+}

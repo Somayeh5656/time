@@ -1,0 +1,46 @@
+.account-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:50vh;
+    text-align: center;
+    margin-top: 70px;
+    gap:19px;
+    padding: 0rem 1.5rem;
+
+}
+
+.user-icon{
+    font-size:150px;
+    margin-bottom: 25px;;
+
+}
+
+
+.btn {
+    font-size: 1.1rem;
+    width: 100%;
+    padding:12px;
+    max-width: 700px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    
+  }
+
+.account-page{
+    border: 2px solid black;    
+    color: black;
+    background-color: white; 
+
+}
+
+.create-account{
+    color: white;
+    background-color: black;
+    border: 2px solid black; 
+    
+}
+
