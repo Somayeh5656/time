@@ -11,7 +11,7 @@ const SignIn = ()=>{
 
 
     const handleChange= (e)=>{
-        const {name,value} =e.target;
+        const {name,value} = e.target;
         setFormData(prev=>({...prev, [name]:value }));
 
     }
@@ -22,8 +22,8 @@ const SignIn = ()=>{
         try{
             const response=await fetch("http://localhost:5000/api/auth",{
                 method:"POST",
-                headers:{"content-type":"application.json"},
-                body:JSON.stringfy(formData)
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(formData),
             });
             const data=await response.json();
 
@@ -35,8 +35,8 @@ const SignIn = ()=>{
 
             }
 
-        }catch(err){
-            console.error("Login error:", err);
+        }catch(error){
+            console.error("Login error:", error);
             alert("Something went wrong");
 
         }
@@ -50,7 +50,7 @@ const SignIn = ()=>{
     return (
         <>
             
-            <div className="sign-in-container" onSubmit={handleSubmit}>
+            <form className="sign-in-container" onSubmit={handleSubmit}>
             <div className="task-icon"><RiCalendarCheckFill /> </div>
                 
                 <h1>SignIn</h1>
@@ -64,7 +64,7 @@ const SignIn = ()=>{
 
                 <button type="submit" className="btn sign-btn signing-page">Sign In</button>
 
-            </div>
+            </form>
         
         </>
 
