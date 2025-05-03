@@ -1,10 +1,14 @@
 .app-header {
   display: flex;
   justify-content: space-between;
+  position:sticky;
+  top:0;
   align-items: center;
   height: 50px;
   padding: 5px 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(40px);
+  padding-bottom: 12px;
 }
 
 .left-icons{
@@ -73,8 +77,11 @@
   width: 30%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.76);
+  contain:paint;
   transition: transform 0.5s ease;
   transform: translateX(-100%);
+  backdrop-filter: blur(400px);
+  z-index: 9999;
   
 }
 
@@ -136,7 +143,7 @@
 
 
 /* Media Queries */
-@media screen and (min-width: 824px) {
+@media screen and (min-width: 910px) {
   .desktop-menu {
     display: block;
   }

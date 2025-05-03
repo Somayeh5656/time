@@ -1,0 +1,97 @@
+.routines-container {
+    font-family: sans-serif;
+    padding:30px;
+  }
+  
+  .dayview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    position:sticky;
+    top:60px;
+    background-color:  rgba(0, 0, 0, 0.31);
+    backdrop-filter: blur(40px);
+    margin: -30px;
+    padding:10px;
+    font-family: sans-serif;
+    font-size: 17px;
+    margin-bottom: 26px;
+    font-weight: normal;
+    text-align: center;
+    padding-left: 32px;
+    padding-left: 53px;
+  }
+
+  .add-task-btn{
+    background: none;
+    cursor: pointer;
+    font-size: 21px;  
+    border: none;
+    padding: 0 45px;
+
+
+  }
+  .add-task-btn:hover{
+    color: white;
+    
+  }
+
+  .weekdays-row{
+    display:flex;
+    justify-content: space-between;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    padding:0 25px;
+  }
+
+  .weekday-cell{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+
+
+  }
+
+  .weekday-name{
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+  }
+
+  .weekday-date{
+ 
+    padding: 6px 10px;
+    border-radius: 50%;
+
+
+  }
+
+
+.today-circle{
+    background-color: black;
+    color: white;
+    
+}
+
+
+  
+  .dayview-hour {
+    height: 65px;
+    border-bottom: 1px solid #ccc;
+    padding-left: 10px;
+ 
+    width:100%;
+    display: flex;
+   align-items:center;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+  }
+  
+
+  @media screen and (min-width:910px){
+    .dayview-header{
+        text-align: left;
+        padding-left: 36px;;
+    }
+  }

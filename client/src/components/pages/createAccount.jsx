@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "./createAccount.css"
 import React,{useState} from "react";
-
+import axios from "../../utils/axios"
+import { useNavigate } from "react-router-dom";
 
 
 const CreateAccount = ()=>{
@@ -20,33 +21,31 @@ const CreateAccount = ()=>{
 
     }
 
+    const navigate= useNavigate();
+
     const handleSubmit = async(e)=>{
         e.preventDefault();
 
-        if (formData.password != formData.repeatpassword){
+        if (formData.password !== formData.repeatpassword){
             alert("Password do not match");
+            return;
+        } if (formData.password.length<6){
+            alert("Password must be at least 6 characters");
             return;
         }
 
         try{
-            const response= await fetch("http://localhost:5000/api/users",{
-                method:"POST",
-                headers:{"content-Type": "application/json"},
-                body: JSON.stringify(formData),
-            });
-
-            const data= await response.json();
-            if (response.ok){
-                alert("Account created!")
-
-            }else{
-                alert(data.message || "Something went wrong");
-            }
+            
+            const {username, email, password}= formData;
+            const response= await axios.post("/users",{username, email, password});
+            console.log("Login response:", response.data)
+            alert("Account created!");
+            navigate ("/signIn")
             }catch(error){
                 console.error("signup error", error)
+                alert(error.response?.data?.message||"Something went wrong")
             }
-
-    }
+    };
 
     return(
         <div className="create-account-container">

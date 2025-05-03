@@ -13,6 +13,7 @@ import StudyWork from './components/pages/studyWork';
 import ToDo from './components/pages/todo';
 import SignIn from './components/pages/signIn';
 import CreateAccount from './components/pages/createAccount';
+import RoutinesTasks from './components/pages/routines-tasks';
 
 
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="/todo" element= {<ToDo/>}></Route>
             <Route path="/signIn" element={<SignIn />}></Route>
             <Route path="/createAccount" element={< CreateAccount/>}></Route>
+            <Route path="/routines-tasks" element={<RoutinesTasks />}></Route>
             
           </Route>
           

@@ -1,6 +1,8 @@
 import "./signIn.css"
 import { RiCalendarCheckFill } from "react-icons/ri";
 import React, {useState} from "react";
+import axios from "../../utils/axios"
+
 
 
 const SignIn = ()=>{
@@ -20,36 +22,21 @@ const SignIn = ()=>{
         e.preventDefault();
 
         try{
-            const response=await fetch("http://localhost:5000/api/auth",{
-                method:"POST",
-                headers:{"Content-Type":"application/json"},
-                body: JSON.stringify(formData),
-            });
-            const data=await response.json();
-
-            if(response.ok){
+            const response=await axios.post("/auth", formData);
+            console.log("Login response:", response.data)
                 alert("Login successful")
-
-            }else{
-                alert(data.message|| "Login failed")
-
-            }
 
         }catch(error){
             console.error("Login error:", error);
-            alert("Something went wrong");
+            alert(error.response?.data?.message||"something went wrong");
 
         }
 
     };
 
 
-
-
-
     return (
-        <>
-            
+        <>            
             <form className="sign-in-container" onSubmit={handleSubmit}>
             <div className="task-icon"><RiCalendarCheckFill /> </div>
                 
@@ -57,15 +44,12 @@ const SignIn = ()=>{
                 <label>Email</label>
                 <input name="email" value={formData.email} onChange={handleChange} type="text" placeholder="example@gmail.com" required ></input>
 
-
-
                 <label>Password</label>
-                <input name="password" value={formData.password} onChange={handleChange} type="password" placeholder="*************************"></input>
+                <input name="password" value={formData.password} onChange={handleChange} type="password" placeholder="****************" required></input>
 
                 <button type="submit" className="btn sign-btn signing-page">Sign In</button>
 
             </form>
-        
         </>
 
 
