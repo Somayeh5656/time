@@ -1,0 +1,83 @@
+.dayview-container{
+  position: relative;
+  height:1590px;
+  z-index: 1;
+
+  overflow: hidden;
+
+
+
+
+}
+
+.dayview-hour{
+  color:grey;
+  display: flex;
+  justify-content: flex-start;
+  height:65px;
+  border-top: 2px solid #eee;
+  font-family: 'Times New Roman', Times, serif;
+  
+
+  
+
+}
+
+.hour-label{
+  font-size: 13px;
+
+  padding: 0 8px;
+
+  
+}
+
+.event-block{
+  position: absolute;
+  border: 1px solid #eee;
+  background-color: rgb(226, 226, 226);
+  border-left: 4px solid black;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 4px;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 15px;
+
+  cursor: pointer; 
+  margin-left: 50px;
+}
+
+.event-block:hover{
+  font-size: 17px;
+}
+
+
+.indicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.indicator-circle{
+  background-color: black;
+  color: white;
+  font-size: 11.9px;
+  padding: 1px 5.2px;
+  border-radius: 3px;
+  margin-right: 6px; 
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.indicator-line{
+  flex-grow: 1;
+  height: 2px;
+  background-color: black;
+  
+}
+
+

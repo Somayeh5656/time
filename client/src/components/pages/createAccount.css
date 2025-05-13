@@ -56,6 +56,19 @@ width: 80%;
 }
 
 
+.error-message{
+    color:rgb(0, 0, 0);
+    background-color: rgb(223, 232, 242);
+    width: 83.5%;
+    max-width: 694px;
+    min-width: 220px;
+    margin-top: -99px;
+    margin-bottom: 100px;
+    text-align: center;
+    padding :2px 0px;
+}
+
+
 
 @media screen  and  ( max-width:500px ){
     .create-account-container{
@@ -75,7 +88,7 @@ width: 80%;
     }
 
     input{
-       width: 90%;;
+       width: 90%;
         margin-top: 1px;
         margin-bottom: 27px;
     }
@@ -86,3 +99,4 @@ width: 80%;
 
     
 }
+

@@ -2,15 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const userRoutes= require('./routes/users')
-const authRoutes= require('./routes/auth')
+const createAccountRoutes= require('./routes/createAccount')
+const signInRoutes= require('./routes/signIn')
+
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/api/users',userRoutes);
-app.use('/api/auth',authRoutes)
+app.use('/api/createAccount',createAccountRoutes);
+app.use('/api/signIn',signInRoutes)
 
 mongoose.connect(process.env.MONGO_URI,{
   useNewUrlParser: true,

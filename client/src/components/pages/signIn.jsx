@@ -2,10 +2,12 @@ import "./signIn.css"
 import { RiCalendarCheckFill } from "react-icons/ri";
 import React, {useState} from "react";
 import axios from "../../utils/axios"
+import { useNavigate } from "react-router-dom";
 
 
 
 const SignIn = ()=>{
+    const navigate= useNavigate();
     const [formData, setFormData]=useState({
         email:"",
         password:""
@@ -22,17 +24,20 @@ const SignIn = ()=>{
         e.preventDefault();
 
         try{
-            const response=await axios.post("/auth", formData);
+            const response=await axios.post("/signIn", formData);
             console.log("Login response:", response.data)
                 alert("Login successful")
+                navigate("/");
 
         }catch(error){
             console.error("Login error:", error);
+            console.log("Full error response: ",error.response)
             alert(error.response?.data?.message||"something went wrong");
 
         }
 
     };
+    
 
 
     return (

@@ -1,0 +1,116 @@
+.routines-container {
+    font-family: sans-serif;
+    padding:30px;
+    max-width: 100vw;
+    z-index: 1000;
+  }
+  
+  .dayview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    position:sticky;
+    top:60px;
+    background-color:  rgba(0, 0, 0, 0.31);
+    backdrop-filter: blur(40px);
+    margin: -30px;
+    padding:10px;
+    font-family: 'Times New Roman', Times, serif;;
+    font-size: 16px;
+    margin-bottom: 26px;
+    font-weight: normal;
+    text-align: center;
+    padding-left: 52px;
+    z-index: 1000;
+
+  }
+
+  .button-group {
+    display: flex;
+    gap: 17px; /* Säädä väliä nappien välillä */
+    align-items: center;
+    margin-right: 30px;
+  }
+
+  .add-task-btn{
+    background: none;
+    cursor: pointer;
+    font-size: 21px;  
+    border: none;
+  
+    color: black;
+  }
+
+  .add-task-btn:hover{
+    color: white;    
+  }
+
+
+.reset-today-btn{
+  color:black;
+  background:none ;
+  border: none;
+  font-size: 20px;
+
+}
+.reset-today-btn:hover{
+  color: white;
+}
+
+  
+.week-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.week-navigation button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.week-navigation button:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+  .weekdays-row{
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding:0 24px;
+  }
+
+  .weekday-cell{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
+
+  }
+
+  .weekday-name{
+    font-weight: bold;
+    margin-bottom: 10px;;
+  }
+
+  .weekday-date{ 
+    padding: 3px 9px;
+    border-radius: 6%;
+
+  }
+
+
+.today-circle{
+    background-color: black;
+    color: white; 
+
+}
+
