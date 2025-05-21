@@ -3,18 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout';
 import './App.css';
 import Account from './components/pages/account';
-import Calender from './components/pages/calender';
-import Goals from './components/pages/goals';
 import Health from './components/pages/health/health';
 import House from './components/pages/house';
-import Reminders from './components/pages/reminders';
 import Routines from './components/pages/routines/routines';
-import StudyWork from './components/pages/studyWork';
-import ToDo from './components/pages/todo';
+import Diary from './components/pages/diary';
 import SignIn from './components/pages/signIn';
+import Goals from './components/pages/goals';
 import CreateAccount from './components/pages/createAccount';
-import RoutinesTasks from './components/pages/routines-tasks';
-
+import Feelings from './components/pages/health/feelings/feelings';
 
 
 
@@ -29,17 +25,14 @@ function App() {
           
           <Route path="/" element={<Layout />}>
             <Route path="/account" element= {<Account />}></Route>
-            <Route path="/calender" element= {<Calender />}></Route>
             <Route path="/goals" element= {<Goals />}></Route>
-            <Route path="/health" element= {<Health />}></Route>
-            <Route path="/house" element= {<House />}></Route>
-            <Route path="/reminders" element= {<Reminders />}></Route>
+            <Route path="/feelings" element= {<Feelings />}></Route>
+            <Route path="/house" element= {<House />}></Route>          
             <Route path="/routines" element= {<Routines />}></Route>
-            <Route path="/studyWork" element= {<StudyWork />}></Route>
-            <Route path="/todo" element= {<ToDo/>}></Route>
+            <Route path="/diary" element= {<Diary />}></Route>         
             <Route path="/signIn" element={<SignIn />}></Route>
             <Route path="/createAccount" element={< CreateAccount/>}></Route>
-            <Route path="/routines-tasks" element={<RoutinesTasks />}></Route>
+           
             
           </Route>
           

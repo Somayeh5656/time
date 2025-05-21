@@ -57,7 +57,7 @@
 .desktop-menu ul {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 70px;
  
 }
 
@@ -65,7 +65,7 @@
   text-decoration: none;
   color: black;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
 
 }
 
@@ -136,7 +136,7 @@
 .mobile-menu li a {
   display: block;
   font-weight: 500;
-  padding: 15px;
+  padding: 20px;
   text-decoration: none;
   color: white;
   font-size: 18px;

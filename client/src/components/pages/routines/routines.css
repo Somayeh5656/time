@@ -22,6 +22,7 @@
     text-align: center;
     padding-left: 52px;
     z-index: 1000;
+    min-width: 350px;
 
   }
 
@@ -51,6 +52,8 @@
   background:none ;
   border: none;
   font-size: 20px;
+  max-width:40px;
+  
 
 }
 .reset-today-btn:hover{

@@ -1,0 +1,119 @@
+.review-container {
+   position: fixed; /* Näkyy koko ruudun päällä */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+ 
+  z-index: 9999;
+
+
+  
+  margin: 50px auto;
+  background-color: black;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 30px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+ 
+  
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.timestamp {
+  font-size: 14px;
+  color: gray;
+}
+
+
+.emotion-name {
+  margin: 0;
+  font-size: 28px;
+  color: white;
+  text-align: center;
+  margin-bottom: 59px;
+}
+
+
+.feeling-header,
+.impact-header {
+
+  font-size: 23px;
+  margin: 0;
+  border-radius: 3px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.feeling-header::after,
+.impact-header::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: white;
+  margin-top: 8px;
+  opacity: 0.5;
+}
+
+.review-content ul {
+  margin: 0;
+
+  list-style-type: none;
+  
+}
+
+.review-content li::before {
+  content: "- "; /* Viiva ennen tekstiä */
+  color: white;
+}
+
+.review-content li {
+  font-size: 16px;
+  color: white;
+  
+}
+
+.review-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  
+}
+
+.feeling-grid,
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); /* max 5 per rivi */
+  gap: 15px;
+  margin-top: 5px;
+  
+}
+
+.feeling-item,
+.impact-item {
+  background-color: #222;
+  padding: 8px 12px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #555;
+}
+
+

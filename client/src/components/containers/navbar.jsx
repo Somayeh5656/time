@@ -30,13 +30,10 @@ const Navbar = ({}) => {
           <ul>
             <li><Link to="/routines" onClick={()=> setMenuOpen(false)}>Routines</Link></li>
             <li><Link to="/goals"  onClick={()=> setMenuOpen(false)}>Goals</Link></li>
-            <li><Link to="/studyWork" onClick={()=> setMenuOpen(false)}>Study & work </Link></li>
-            <li><Link to="/house" onClick={()=> setMenuOpen(false)}>House</Link></li>
-            <li><Link to="/health" onClick={()=> setMenuOpen(false)}>Health</Link></li>
-            <li><Link to="/todo" onClick={()=> setMenuOpen(false)}>To-do</Link></li>
-            <li><Link to="/reminders" onClick={()=> setMenuOpen(false)}>Reminders</Link></li>
-            <li><Link to="/calender" onClick={()=> setMenuOpen(false)}>Calender</Link></li>
-
+            <li><Link to="/diary" onClick={()=> setMenuOpen(false)}>Diary</Link></li>
+           
+            <li><Link to="/feelings" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
+  
           </ul>
         </nav>
 
@@ -57,12 +54,9 @@ const Navbar = ({}) => {
         <ul>
             <li><Link to="/routines" onClick={()=> setMenuOpen(false)}>Routines</Link></li>
             <li><Link to="/goals" onClick={()=> setMenuOpen(false)}>Goals </Link></li>
-            <li><Link to="/studyWork" onClick={()=> setMenuOpen(false)}>Study & work </Link></li>
-            <li><Link to="/house" onClick={()=> setMenuOpen(false)}>House</Link></li>
-            <li><Link to="/health" onClick={()=> setMenuOpen(false)}>Health</Link></li>
-            <li><Link to="/todo" onClick={()=> setMenuOpen(false)}>To-do</Link></li>
-            <li><Link to="/reminders" onClick={()=> setMenuOpen(false)}>Reminders</Link></li>
-            <li><Link to="/calender" onClick={()=> setMenuOpen(false)}>Calender</Link></li>
+             <li><Link to="/diary" onClick={()=> setMenuOpen(false)}>Diary</Link></li>
+
+            <li><Link to="/feelings" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
             <li><Link to="/account" onClick={()=> setMenuOpen(false)}>Account</Link></li>
           </ul>
       </nav>

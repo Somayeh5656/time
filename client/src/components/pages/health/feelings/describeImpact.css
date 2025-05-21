@@ -1,0 +1,167 @@
+.describe-impact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 80%;
+  padding: 2rem 0rem;
+  background-color: black;
+  font-family:'Times New Roman', Times, serif;
+}
+
+.back-header{
+    display: flex;
+    color: white;
+    justify-content: flex-start;
+    align-items: center;
+    text-shadow: 0 4px 20px white;
+    cursor:pointer;
+    margin-bottom: 30px;
+
+}
+
+.back-icon{
+    margin-bottom: 12px;
+}
+
+.describe-impact-container p {
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.feeling-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.tag-button {
+    background-color: black;
+  color: white;
+  border-color: white;
+  box-shadow: 0 0 20px white;
+  border-radius: 3px;
+  padding: 7px 16px;
+  font-size:13px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.tag-button:hover {
+ 
+  padding: 13px 23px;
+  font-size: 14px;
+  background-color: rgb(51, 49, 49);
+}
+
+.tag-button.active {
+  background-color: rgb(170, 175, 176);
+  color: black;
+  border: 1px solid white;
+  text-shadow: 0 10px 20px white;
+  
+}
+
+
+.show-more-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  background: black;
+ 
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  text-shadow: 0 4px 20px white;
+}
+
+.show-more-icon {
+    margin-bottom: 11px;
+  
+}
+
+
+.impact-question {
+  
+  margin-top: 25px;
+}
+
+.impact-tags {
+  display: flex;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+  width:90%;
+  flex-wrap: wrap;
+  margin-bottom: 45px;
+}
+
+.next-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 170px;
+}
+
+
+.describe-impact-next-button {
+    width:70%;
+    max-width:800px ;
+    min-width: 400px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    font-family:'Times New Roman', Times, serif;
+    background-color:black;
+    box-shadow: 1px 10px 20px white;
+    margin-top: 50px;
+   
+    
+}
+
+
+.emotion-name{
+    padding: 0 15px 4px ;
+    text-align: flex-end;
+    border-radius: 3px;
+      font-size: 20px;
+    margin-bottom: 1.4rem;
+    color: white;
+    
+
+}
+.emotion-name.fear,.describe-impact-next-button.fear{
+    box-shadow: -10px 10px 12px rgb(63, 4, 63);
+}
+.emotion-name.sadness,.describe-impact-next-button.sadness{
+    box-shadow: -10px 10px 12px rgb(0, 75, 128);
+}
+.emotion-name.neutral,.describe-impact-next-button.neutral{
+    box-shadow: -10px 10px 12px rgb(96, 96, 97);
+
+}
+.emotion-name.anger,.describe-impact-next-button.anger{
+    box-shadow: -10px 10px 12px rgb(81, 6, 6);
+
+}
+.emotion-name.joy, .describe-impact-next-button.joy{
+    box-shadow: -10px 10px 12px rgb(81, 83, 9);
+}
+
+
+@media (max-width: 500px) {
+  .describe-impact-next-button {
+    min-width: 90%; /* skaalautuu mobiiliin */
+  }
+}
