@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const createAccountRoutes= require('./routes/createAccount')
 const signInRoutes= require('./routes/signIn')
+const tasksRoutes=require('./routes/tasks')
 
 
 
@@ -12,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/createAccount',createAccountRoutes);
 app.use('/api/signIn',signInRoutes)
+app.use('/api/tasks', tasksRoutes)
+
 
 mongoose.connect(process.env.MONGO_URI,{
   useNewUrlParser: true,

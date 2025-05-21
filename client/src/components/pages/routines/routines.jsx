@@ -79,6 +79,30 @@ const Routines = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [errors,setErrors]=useState({start:"",end:""});
 
+
+  useEffect(() => {
+  const fetchTasks = async () => {
+    try {
+      const res = await fetch("/api/tasks?userId=123");
+      const data = await res.json();
+
+      const tasksGroupedByDate = {};
+      data.forEach((task) => {
+        if (!tasksGroupedByDate[task.date]) {
+          tasksGroupedByDate[task.date] = [];
+        }
+        tasksGroupedByDate[task.date].push(task);
+      });
+
+      setTasksByDateObj(tasksGroupedByDate);
+    } catch (err) {
+      console.error("Virhe tehtävien haussa:", err);
+    }
+  };
+
+  fetchTasks();
+}, []);
+
   // Päivitetään päivämäärän näyttö
   const updateFormattedDate = () => {
     const weekDayName = selectedDateObjD.toLocaleDateString("en-US", { weekday: "long" });
@@ -87,6 +111,7 @@ const Routines = () => {
     const year = selectedDateObjD.getFullYear();
     setFormattedDateStr(`${weekDayName} - ${day}. ${month} ${year}`);
   };
+
 
   useEffect(() => {
     updateFormattedDate();
@@ -211,28 +236,44 @@ const getTasksForSelectedDate=()=> {
 
 
   // Tehtävän tallentaminen lomakkeen kautta
-  const handleTaskSubmit = () => {
-
-    const task = {
-      title: newTaskObj.title,
-      start: timeStringToMinutes(newTaskObj.start),
-      end: timeStringToMinutes(newTaskObj.end),
-      repeat: (newTaskObj.repeat)
-    };
-
-    const updatedTasks = [...tasks];
-
-    if (editingIndex !== null) {
-      updatedTasks[editingIndex] = task;
-    } else {
-      updatedTasks.push(task);
-    }
-
-    setTasksForDate(selectedDateKey, updatedTasks);
-    setShowFormBol(false);
-    setEditingIndex(null);
-    setNewTaskObj({ title: "", start: "", end: "" , repeat:""});
+const handleTaskSubmit = async () => {
+  const task = {
+    title: newTaskObj.title,
+    start: timeStringToMinutes(newTaskObj.start),
+    end: timeStringToMinutes(newTaskObj.end),
+    repeat: newTaskObj.repeat,
+    date: selectedDateKey, // esim. "2025-05-21"
+    userId: "123", // tämä tulisi yleensä kirjautumisen kautta (esim. localStorage, JWT, context)
   };
+
+  const updatedTasks = [...tasks];
+  if (editingIndex !== null) {
+    updatedTasks[editingIndex] = task;
+  } else {
+    updatedTasks.push(task);
+  }
+
+  setTasksForDate(selectedDateKey, updatedTasks);
+  setShowFormBol(false);
+  setEditingIndex(null);
+  setNewTaskObj({ title: "", start: "", end: "", repeat: "" });
+
+  // 🛜 Lähetä palvelimelle
+  try {
+    const response = await fetch("/api/tasks", {
+      method: editingIndex !== null ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(task),
+    });
+
+    if (!response.ok) {
+      throw new Error("Tehtävän tallennus epäonnistui");
+    }
+  } catch (error) {
+    console.error("Virhe tallennettaessa:", error);
+  }
+};
+
 
 
 
