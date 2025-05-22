@@ -33,10 +33,10 @@ const CreateAccount = ()=>{
         if(formData.password !== formData.repeatpassword){
             setError("Password do not match");
             return;
-        } if (formData.password.length<6){
-            setError("Password must be at least 6 characters");
-            return;
-        }
+        }// if (formData.password.length<6){
+            //setError("Password must be at least 6 characters");
+            //return;
+        //}
 
         try{
             const {username, email, password}= formData;
