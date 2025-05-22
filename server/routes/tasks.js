@@ -1,15 +1,35 @@
 const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task");
+const signIn = require('../middleware/signIn');
 
 // POST – uusi tehtävä
-router.post("/", async (req, res) => {
+router.post('/', signIn, async (req, res) => {
+  const { title, start, end, repeat, date } = req.body;
+
   try {
-    const newTask = new Task(req.body);
-    await newTask.save();
-    res.status(201).json(newTask);
+    const task = new Task({
+      userId: req.user.userId,
+      title,
+      start,
+      end,
+      repeat,
+      date
+    });
+
+    await task.save();
+    res.status(201).json(task);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ message: 'Virhe tallennettaessa tehtävää' });
+  }
+});
+
+router.get('/', signIn, async (req, res) => {
+  try {
+    const tasks = await Task.find({ userId: req.user.userId });
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ message: 'Virhe haettaessa tehtäviä' });
   }
 });
 

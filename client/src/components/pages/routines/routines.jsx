@@ -211,17 +211,32 @@ const getTasksForSelectedDate=()=> {
 
 
   // Tehtävän tallentaminen lomakkeen kautta
-  const handleTaskSubmit = () => {
+const handleTaskSubmit = async () => {
+  const task = {
+    title: newTaskObj.title,
+    start: timeStringToMinutes(newTaskObj.start),
+    end: timeStringToMinutes(newTaskObj.end),
+    repeat: newTaskObj.repeat,
+  };
+  
 
-    const task = {
-      title: newTaskObj.title,
-      start: timeStringToMinutes(newTaskObj.start),
-      end: timeStringToMinutes(newTaskObj.end),
-      repeat: (newTaskObj.repeat)
-    };
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await fetch("/api/tasks", {
+      method: editingIndex !== null ? "PUT" : "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(task),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save task");
+    }
 
     const updatedTasks = [...tasks];
-
     if (editingIndex !== null) {
       updatedTasks[editingIndex] = task;
     } else {
@@ -231,8 +246,11 @@ const getTasksForSelectedDate=()=> {
     setTasksForDate(selectedDateKey, updatedTasks);
     setShowFormBol(false);
     setEditingIndex(null);
-    setNewTaskObj({ title: "", start: "", end: "" , repeat:""});
-  };
+    setNewTaskObj({ title: "", start: "", end: "", repeat: "" });
+  } catch (error) {
+    console.error("Error submitting task:", error);
+  }
+};
 
 
 
@@ -241,6 +259,9 @@ const getTasksForSelectedDate=()=> {
     setSelectedDateObjD(today);
     setWeekStartDateFunObjD(getStartOfWeek(today));
   };
+
+
+
 
 
   return (

@@ -2,14 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 import { HiMenu, HiSearch, HiUser, HiX } from 'react-icons/hi';
 import "./navbar.css";
 import { Link } from "react-router-dom";
-
+import LogOut from "../pages/logOut";
 
 const Navbar = ({}) => {
   const [menuOpen, setMenuOpen] = useState(false);
+   const [loggedIn, setLoggedIn] = useState(false);
+
+   useEffect(() => {
+    const token = localStorage.getItem("token");
+    setLoggedIn(!!token);
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
 
   return (
     <>
@@ -33,13 +40,19 @@ const Navbar = ({}) => {
             <li><Link to="/diary" onClick={()=> setMenuOpen(false)}>Diary</Link></li>
            
             <li><Link to="/feelings" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
-  
           </ul>
         </nav>
 
-        <Link to="/account" className="right-icon" >
-          <HiUser />
-        </Link>
+        <div className="right-icon">
+        {loggedIn ? (
+          <LogOut className="logout-btn" children="Sign Out" />
+        ) : (
+          <Link to="/account">
+            <HiUser />
+          </Link>
+        )}
+      </div>
+
 
       </header>
 
@@ -57,7 +70,15 @@ const Navbar = ({}) => {
              <li><Link to="/diary" onClick={()=> setMenuOpen(false)}>Diary</Link></li>
 
             <li><Link to="/feelings" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
-            <li><Link to="/account" onClick={()=> setMenuOpen(false)}>Account</Link></li>
+            {loggedIn ? (
+           <li><LogOut className="logout-btn" children="Sign Out" /></li>
+        ) : (
+          <li><Link to="/account" onClick={() => setMenuOpen(false)}>Account</Link></li>
+          )}
+
+           
+
+
           </ul>
       </nav>
 

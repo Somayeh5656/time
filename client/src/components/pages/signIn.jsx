@@ -26,6 +26,8 @@ const SignIn = ()=>{
         try{
             const response=await axios.post("/signIn", formData);
             console.log("Login response:", response.data)
+            localStorage.setItem("token", response.data.token);
+
                 alert("Login successful")
                 navigate("/");
 
