@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout';
 import './App.css';
@@ -17,20 +17,21 @@ import Feelings from './components/pages/health/feelings/feelings';
 
 function App() {
   
+  const[loggedIn,setLoggedIn]=useState(!!localStorage.getItem("token"))
 
   return (
     <>
       <Router>
         <Routes>
           
-          <Route path="/" element={<Layout />}>
-            <Route path="/account" element= {<Account />}></Route>
+          <Route path="/" element={<Layout loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}>
+            <Route path="/account" element= {<Account loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}></Route>
             <Route path="/goals" element= {<Goals />}></Route>
             <Route path="/feelings" element= {<Feelings />}></Route>
             <Route path="/house" element= {<House />}></Route>          
             <Route path="/routines" element= {<Routines />}></Route>
             <Route path="/diary" element= {<Diary />}></Route>         
-            <Route path="/signIn" element={<SignIn />}></Route>
+            <Route path="/signIn" element={<SignIn setLoggedIn={setLoggedIn} />}></Route>
             <Route path="/createAccount" element={< CreateAccount/>}></Route>
            
             

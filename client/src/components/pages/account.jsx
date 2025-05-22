@@ -2,24 +2,22 @@ import { FaUserCircle } from "react-icons/fa";
 import "./account.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import LogOut from "./logOut";
 
-const Account = () => {
+
+const Account = ({loggedIn, setLoggedIn}) => {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setLoggedIn(!!token); // true jos token löytyy
-  }, []);
-
+  const handleLogout=()=>{
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+    navigate("/signIn")
+  }
 
   return (
     <div className="account-container">
       <FaUserCircle className="user-icon" />
       
        {loggedIn ? (
-        <LogOut />
+        <span onclick={handleLogout} className="btn logout"> Sign Out </span>
       ) : (
         <>
           <Link to="/signIn" className="btn sign-in account-page">Sign In</Link>

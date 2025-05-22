@@ -4,9 +4,9 @@ import "./navbar.css";
 import { Link } from "react-router-dom";
 import LogOut from "../pages/logOut";
 
-const Navbar = ({}) => {
+const Navbar = ({loggedIn,setLoggedIn}) => {
   const [menuOpen, setMenuOpen] = useState(false);
-   const [loggedIn, setLoggedIn] = useState(false);
+   
 
    useEffect(() => {
     const token = localStorage.getItem("token");
@@ -16,6 +16,11 @@ const Navbar = ({}) => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const handleLogout=()=>{
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+  }
 
 
   return (
@@ -45,7 +50,7 @@ const Navbar = ({}) => {
 
         <div className="right-icon">
         {loggedIn ? (
-          <LogOut className="logout-btn" children="Sign Out" />
+          <span className="logout-btn" onClick={()=>{handleLogout()}} >Sign Out</span>
         ) : (
           <Link to="/account">
             <HiUser />
@@ -71,7 +76,7 @@ const Navbar = ({}) => {
 
             <li><Link to="/feelings" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
             {loggedIn ? (
-           <li><LogOut className="logout-btn" children="Sign Out" /></li>
+           <li><span className="logout-btn" onClick={()=>{handleLogout();toggleMenu();}}>Sign Out</span></li>
         ) : (
           <li><Link to="/account" onClick={() => setMenuOpen(false)}>Account</Link></li>
           )}

@@ -1,10 +1,10 @@
 import Navbar from "./containers/navbar";
 import {Outlet} from "react-router-dom";
 
-const Layout = ()=> {
+const Layout = ({loggedIn, setLoggedIn})=> {
     return (
         <>
-            <Navbar />
+            <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
             <main>
                 <Outlet />
             </main> 

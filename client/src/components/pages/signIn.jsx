@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const SignIn = ()=>{
+const SignIn = ({setLoggedIn})=>{
     const navigate= useNavigate();
     const [formData, setFormData]=useState({
         email:"",
@@ -27,7 +27,8 @@ const SignIn = ()=>{
             const response=await axios.post("/signIn", formData);
             console.log("Login response:", response.data)
             localStorage.setItem("token", response.data.token);
-
+            
+            setLoggedIn(true)
                 alert("Login successful")
                 navigate("/");
 
