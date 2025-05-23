@@ -82,40 +82,6 @@ const Routines = () => {
 
 
 
-  useEffect(() => {
-  const fetchTasks = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    try {
-      const response = await fetch("/api/tasks", {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      });
-
-      if (!response.ok) throw new Error("Failed to fetch tasks");
-
-      const data = await response.json();
-
-      // Muotoile tehtävät päivämäärän mukaan
-      const tasksByDate = {};
-      for (const task of data) {
-        const dateKey = selectedDateKey; // Voit muuttaa jos tallenna päivämäärä taskin mukana
-        if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
-        tasksByDate[dateKey].push(task);
-      }
-
-      setTasksByDateObj(tasksByDate);
-    } catch (err) {
-      console.error("Failed to fetch tasks:", err);
-    }
-  };
-
-  fetchTasks();
-}, []);
-
-
   // Päivitetään päivämäärän näyttö
   const updateFormattedDate = () => {
     const weekDayName = selectedDateObjD.toLocaleDateString("en-US", { weekday: "long" });
@@ -133,6 +99,7 @@ const Routines = () => {
 
  
 const selectedDateKey=selectedDateObjD.toISOString().split("T")[0];
+
 const getTasksForSelectedDate=()=> {
     const baseTasks=tasksByDateObj[selectedDateKey]|| [];
     const allTasks=[];
@@ -165,10 +132,47 @@ const getTasksForSelectedDate=()=> {
   const tasks = getTasksForSelectedDate();
 
 
+
   // Funktio, joka päivittää tehtävät tietylle päivälle
   const setTasksForDate = (dateKey, tasks) => {
     setTasksByDateObj((prev) => ({ ...prev, [dateKey]: tasks }));
   };
+
+
+  
+
+  useEffect(() => {
+  const fetchTasks = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const response = await fetch("/api/tasks", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch tasks");
+
+      const data = await response.json();
+
+      // Muotoile tehtävät päivämäärän mukaan
+      const tasksByDate = {};
+      for (const task of data) {
+        const dateKey = selectedDateKey; // Voit muuttaa jos tallenna päivämäärä taskin mukana
+        if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
+        tasksByDate[dateKey].push(task);
+      }
+
+      setTasksByDateObj(tasksByDate);
+    } catch (err) {
+      console.error("Failed to fetch tasks:", err);
+    }
+  };
+
+  fetchTasks();
+}, []);
 
   // Funktio tehtävän lisäämiseen
   const handleAddTask = () => {
@@ -227,6 +231,7 @@ const getTasksForSelectedDate=()=> {
                 t.start=== taskToDelete.start &&
                 t.end===taskToDelete.end &&
                 t.repeat === taskToDelete.repeat
+
             );
 
             if(indexInOriginal!==-1){
@@ -255,6 +260,7 @@ const handleTaskSubmit = async () => {
     start: timeStringToMinutes(newTaskObj.start),
     end: timeStringToMinutes(newTaskObj.end),
     repeat: newTaskObj.repeat,
+    date: selectedDateKey,
   };
 
 

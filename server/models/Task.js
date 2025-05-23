@@ -5,7 +5,9 @@ const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   start: { type: Number, required: true },
   end: { type: Number, required: true },
-  repeat: { type: String }
+  repeat: { type: String },
+  date: { type: String, required: true }, 
+
 });
 
 module.exports = mongoose.model("Task", taskSchema);

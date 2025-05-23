@@ -51,7 +51,8 @@ router.put("/", authenticateUser, async (req, res) => {
         title,
         start,
         end,
-        repeat
+        repeat,
+        date
       },
       req.body,
       { new: true }
