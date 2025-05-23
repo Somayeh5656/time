@@ -5,7 +5,7 @@ import DayView from "./dayView";
 import WeekHeader from "./weekHeader";
 import TaskForm from "./taskForm";
 import { LuTimerReset } from "react-icons/lu";
-import axios from "axios";
+import axios from "../../../utils/axios"
 
 const weeknames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const Today = new Date();
