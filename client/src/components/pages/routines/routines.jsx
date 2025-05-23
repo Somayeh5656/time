@@ -140,34 +140,23 @@ const getTasksForSelectedDate=()=> {
 
 
   
-
-  useEffect(() => {
+useEffect(() => {
   const fetchTasks = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
     try {
-      const response =await fetch(`/api/tasks/${task._id}`, {
-         method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
+      const response = await fetch("/api/tasks", {
+        headers: { "Authorization": `Bearer ${token}` }
       });
-      const response = await fetch(`/api/tasks/${task._id}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    });
 
       if (!response.ok) throw new Error("Failed to fetch tasks");
 
       const data = await response.json();
-
-      // Muotoile tehtävät päivämäärän mukaan
       const tasksByDate = {};
+
       for (const task of data) {
-        const dateKey = task.date; // Voit muuttaa jos tallenna päivämäärä taskin mukana
+        const dateKey = task.date;
         if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
         tasksByDate[dateKey].push(task);
       }
@@ -180,6 +169,8 @@ const getTasksForSelectedDate=()=> {
 
   fetchTasks();
 }, []);
+
+
 
   // Funktio tehtävän lisäämiseen
   const handleAddTask = () => {
@@ -225,43 +216,43 @@ const getTasksForSelectedDate=()=> {
 
 
   // Tehtävän poistaminen
-  const handleDeleteTask = () => {
-   
-      if (editingIndex !==null){
-        const taskToDelete= tasks[editingIndex];
-
-        for( const dateKey in tasksByDateObj){
-            const taskList=tasksByDateObj[dateKey];
-
-            const indexInOriginal=taskList.findIndex(t=>
-                t.title==taskToDelete.title && 
-                t.start=== taskToDelete.start &&
-                t.end===taskToDelete.end &&
-                t.repeat === taskToDelete.repeat
-
-            );
-
-            if(indexInOriginal!==-1){
-                const newTaskList=[...taskList];
-                newTaskList.splice(indexInOriginal,1);
-                setTasksForDate(dateKey,newTaskList);
-                break;
-            }
-        }
-
-      }
+const handleDeleteTask = async () => {
+  if (editingIndex === null) return;
   
-      // Nollataan lomake ja tilat
-      setEditingIndex(null);
-      setShowFormBol(false);
-      setNewTaskObj({ title: "", start: "", end: "", repeat: "" });
-    
-  };
+  const taskToDelete = tasks[editingIndex];
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await fetch(`/api/tasks/${taskToDelete._id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) throw new Error("Failed to delete task");
+
+    // Remove from local state
+    const newTaskList = tasks.filter((_, i) => i !== editingIndex);
+    setTasksForDate(selectedDateKey, newTaskList);
+  } catch (error) {
+    console.error("Failed to delete task:", error);
+  }
+
+  setEditingIndex(null);
+  setShowFormBol(false);
+  setNewTaskObj({ title: "", start: "", end: "", repeat: "" });
+};
+
   
 
 
   // Tehtävän tallentaminen lomakkeen kautta
 const handleTaskSubmit = async () => {
+  const token = localStorage.getItem("token");
+  const editedTask = tasks[editingIndex];
+  const isEditing = editingIndex !== null;
+
   const task = {
     title: newTaskObj.title,
     start: timeStringToMinutes(newTaskObj.start),
@@ -270,28 +261,28 @@ const handleTaskSubmit = async () => {
     date: selectedDateKey,
   };
 
-
-  const token = localStorage.getItem("token");
-
   try {
-    const response = await fetch("/api/tasks", {
-      method: editingIndex !== null ? "PUT" : "POST",
+    const url = isEditing ? `/api/tasks/${editedTask._id}` : "/api/tasks";
+    const method = isEditing ? "PUT" : "POST";
+
+    const response = await fetch(url, {
+      method,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`
       },
-      body: JSON.stringify(task),
+      body: JSON.stringify(task)
     });
 
-    if (!response.ok) {
-      throw new Error("Failed to save task");
-    }
+    if (!response.ok) throw new Error("Failed to save task");
 
+    const savedTask = await response.json();
     const updatedTasks = [...tasks];
-    if (editingIndex !== null) {
-      updatedTasks[editingIndex] = task;
+
+    if (isEditing) {
+      updatedTasks[editingIndex] = savedTask;
     } else {
-      updatedTasks.push(task);
+      updatedTasks.push(savedTask);
     }
 
     setTasksForDate(selectedDateKey, updatedTasks);
