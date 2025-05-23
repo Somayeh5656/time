@@ -178,7 +178,7 @@ useEffect(() => {
     const endTime = getOneHourLater(startTime);
     setShowFormBol(true);
     setEditingIndex(null);
-    setNewTaskObj({ title: "", start: startTime, end: endTime, repeat: "" });
+    setNewTaskObj({ title: "", start: startTime, end: endTime, repeat: "", date:selectedDateKey });
   };
 
   // Siirrytään seuraavaan viikkoon
@@ -209,6 +209,7 @@ useEffect(() => {
       start: minutesToTimeString(task.start),
       end: minutesToTimeString(task.end),
       repeat: task.repeat,
+      date:task.date
     });
     setEditingIndex(index);
     setShowFormBol(true);
