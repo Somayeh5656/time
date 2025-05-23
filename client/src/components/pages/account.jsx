@@ -17,7 +17,7 @@ const Account = ({loggedIn, setLoggedIn}) => {
       <FaUserCircle className="user-icon" />
       
        {loggedIn ? (
-        <span onclick={handleLogout} className="btn logout"> Sign Out </span>
+        <span onClick={handleLogout} className="btn logout"> Sign Out </span>
       ) : (
         <>
           <Link to="/signIn" className="btn sign-in account-page">Sign In</Link>

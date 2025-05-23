@@ -79,6 +79,43 @@ const Routines = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [errors,setErrors]=useState({start:"",end:""});
 
+
+
+
+  useEffect(() => {
+  const fetchTasks = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const response = await fetch("/api/tasks", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch tasks");
+
+      const data = await response.json();
+
+      // Muotoile tehtävät päivämäärän mukaan
+      const tasksByDate = {};
+      for (const task of data) {
+        const dateKey = selectedDateKey; // Voit muuttaa jos tallenna päivämäärä taskin mukana
+        if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
+        tasksByDate[dateKey].push(task);
+      }
+
+      setTasksByDateObj(tasksByDate);
+    } catch (err) {
+      console.error("Failed to fetch tasks:", err);
+    }
+  };
+
+  fetchTasks();
+}, []);
+
+
   // Päivitetään päivämäärän näyttö
   const updateFormattedDate = () => {
     const weekDayName = selectedDateObjD.toLocaleDateString("en-US", { weekday: "long" });
@@ -87,6 +124,7 @@ const Routines = () => {
     const year = selectedDateObjD.getFullYear();
     setFormattedDateStr(`${weekDayName} - ${day}. ${month} ${year}`);
   };
+
 
   useEffect(() => {
     updateFormattedDate();
@@ -218,7 +256,7 @@ const handleTaskSubmit = async () => {
     end: timeStringToMinutes(newTaskObj.end),
     repeat: newTaskObj.repeat,
   };
-  
+
 
   const token = localStorage.getItem("token");
 

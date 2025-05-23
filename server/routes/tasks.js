@@ -1,50 +1,65 @@
 const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task");
-const signIn = require('../middleware/signIn');
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
-// POST – uusi tehtävä
-router.post('/', signIn, async (req, res) => {
-  const { title, start, end, repeat, date } = req.body;
+// Middleware: vahvista käyttäjä tokenilla
+const authenticateUser = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ message: "Missing token" });
 
+  const token = authHeader.split(" ")[1];
   try {
-    const task = new Task({
-      userId: req.user.userId,
-      title,
-      start,
-      end,
-      repeat,
-      date
-    });
-
-    await task.save();
-    res.status(201).json(task);
-  } catch (err) {
-    res.status(500).json({ message: 'Virhe tallennettaessa tehtävää' });
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded; // userId ja email
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
   }
-});
+};
 
-router.get('/', signIn, async (req, res) => {
+// Hae käyttäjän tehtävät
+router.get("/", authenticateUser, async (req, res) => {
   try {
     const tasks = await Task.find({ userId: req.user.userId });
     res.json(tasks);
   } catch (err) {
-    res.status(500).json({ message: 'Virhe haettaessa tehtäviä' });
+    res.status(500).json({ message: "Failed to fetch tasks" });
   }
 });
 
-// PUT – muokkaa olemassa olevaa (voit tehdä myös tarkemman logiikan)
-router.put("/", async (req, res) => {
+// Luo uusi tehtävä
+router.post("/", authenticateUser, async (req, res) => {
   try {
-    const { userId, date, title, start, end, repeat } = req.body;
-    const task = await Task.findOneAndUpdate(
-      { userId, date, title, start, end },
-      { repeat },
-      { new: true, upsert: true }
-    );
-    res.status(200).json(task);
+    const newTask = new Task({ ...req.body, userId: req.user.userId });
+    await newTask.save();
+    res.status(201).json(newTask);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: "Failed to save task" });
+  }
+});
+
+// Päivitä tehtävä (hae ID esim. otsikko+ajat)
+router.put("/", authenticateUser, async (req, res) => {
+  try {
+    const { title, start, end, repeat } = req.body;
+
+    const task = await Task.findOneAndUpdate(
+      {
+        userId: req.user.userId,
+        title,
+        start,
+        end,
+        repeat
+      },
+      req.body,
+      { new: true }
+    );
+
+    res.json(task);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update task" });
   }
 });
 
