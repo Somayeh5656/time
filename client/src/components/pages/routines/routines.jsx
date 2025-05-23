@@ -72,7 +72,7 @@ const Routines = () => {
   // Lomakkeen näkyvyystila, boolean-arvo
   const [showFormBol, setShowFormBol] = useState(false);
   // Lomakkeen sisällön tiedot
-  const [newTaskObj, setNewTaskObj] = useState({ title: "", start: "", end: "", repeat: "" });
+  const [newTaskObj, setNewTaskObj] = useState({ title: "", start: "", end: "", repeat: "" , date:""});
   // Päivämääräkohtaiset tehtävät
   const [tasksByDateObj, setTasksByDateObj] = useState({});
   // Muokattavan tehtävän indeksi listassa
@@ -147,11 +147,18 @@ const getTasksForSelectedDate=()=> {
     if (!token) return;
 
     try {
-      const response = await fetch("/api/tasks", {
+      const response =await fetch(`/api/tasks/${task._id}`, {
+         method: "PUT",
         headers: {
           "Authorization": `Bearer ${token}`
         }
       });
+      const response = await fetch(`/api/tasks/${task._id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
 
       if (!response.ok) throw new Error("Failed to fetch tasks");
 
@@ -160,7 +167,7 @@ const getTasksForSelectedDate=()=> {
       // Muotoile tehtävät päivämäärän mukaan
       const tasksByDate = {};
       for (const task of data) {
-        const dateKey = selectedDateKey; // Voit muuttaa jos tallenna päivämäärä taskin mukana
+        const dateKey = task.date; // Voit muuttaa jos tallenna päivämäärä taskin mukana
         if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
         tasksByDate[dateKey].push(task);
       }

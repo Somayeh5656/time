@@ -41,27 +41,36 @@ router.post("/", authenticateUser, async (req, res) => {
 });
 
 // Päivitä tehtävä (hae ID esim. otsikko+ajat)
-router.put("/", authenticateUser, async (req, res) => {
+router.put("/:id", authenticateUser, async (req, res) => {
   try {
-    const { title, start, end, repeat, date } = req.body;
-
-    const task = await Task.findOneAndUpdate(
-      {
-        userId: req.user.userId,
-        title,
-        start,
-        end,
-        repeat,
-        date
-      },
+    const updatedTask = await Task.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user.userId },
       req.body,
       { new: true }
     );
 
-    res.json(task);
+    if (!updatedTask) return res.status(404).json({ message: "Task not found" });
+
+    res.json(updatedTask);
   } catch (err) {
     res.status(500).json({ message: "Failed to update task" });
   }
 });
+
+router.delete("/:id", authenticateUser, async (req, res) => {
+  try {
+    const deletedTask = await Task.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user.userId
+    });
+
+    if (!deletedTask) return res.status(404).json({ message: "Task not found" });
+
+    res.json({ message: "Task deleted", task: deletedTask });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete task" });
+  }
+});
+
 
 module.exports = router;
