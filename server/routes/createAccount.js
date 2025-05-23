@@ -34,5 +34,15 @@ router.post('/', async(req,res)=>{
         
 })
 
+router.get('/', async (req, res) => {
+  console.log("GET /api/createAccount vastaanotettu");
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 
 module.exports =router;

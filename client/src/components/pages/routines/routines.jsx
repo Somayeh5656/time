@@ -5,6 +5,7 @@ import DayView from "./dayView";
 import WeekHeader from "./weekHeader";
 import TaskForm from "./taskForm";
 import { LuTimerReset } from "react-icons/lu";
+import axios from "axios";
 
 const weeknames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const Today = new Date();
@@ -121,10 +122,15 @@ const getTasksForSelectedDate=()=> {
         (task,index,self)=>
         index===self.findIndex(
         (t)=> 
+        t.id===task.id &&  
         t.title===task.title &&
         t.start===task.start && 
         t.end===task.end &&
-        t.repeat===task.repeat));
+        t.repeat===task.repeat&&
+        t.date===task.date
+
+      
+      ));
 
     return combinedTasks;};
 
@@ -139,36 +145,34 @@ const getTasksForSelectedDate=()=> {
   };
 
 
-  
-useEffect(() => {
-  const fetchTasks = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+const fetchTasks = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
 
-    try {
-      const response = await fetch("/api/tasks", {
-        headers: { "Authorization": `Bearer ${token}` }
-      });
+  try {
+    const response = await axios.get("/tasks", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
-      if (!response.ok) throw new Error("Failed to fetch tasks");
-
-      const data = await response.json();
-      const tasksByDate = {};
-
-      for (const task of data) {
-        const dateKey = task.date;
-        if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
-        tasksByDate[dateKey].push(task);
-      }
-
-      setTasksByDateObj(tasksByDate);
-    } catch (err) {
-      console.error("Failed to fetch tasks:", err);
+    const data = response.data;
+    const tasksByDate = {};
+    for (const task of data) {
+      const dateKey = task.date;
+      if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
+      tasksByDate[dateKey].push(task);
     }
-  };
 
+    setTasksByDateObj(tasksByDate);
+  } catch (err) {
+    console.error("Failed to fetch tasks:", err);
+  }
+};
+
+useEffect(() => {
   fetchTasks();
 }, []);
+
+
 
 
 
@@ -224,14 +228,13 @@ const handleDeleteTask = async () => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch(`/api/tasks/${taskToDelete._id}`, {
-      method: "DELETE",
+    const response = await axios.delete(`/tasks/${taskToDelete._id}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
     });
 
-    if (!response.ok) throw new Error("Failed to delete task");
+     fetchTasks();
 
     // Remove from local state
     const newTaskList = tasks.filter((_, i) => i !== editingIndex);
@@ -242,7 +245,7 @@ const handleDeleteTask = async () => {
 
   setEditingIndex(null);
   setShowFormBol(false);
-  setNewTaskObj({ title: "", start: "", end: "", repeat: "" });
+  setNewTaskObj({ title: "", start: "", end: "", repeat: "" , date:selectedDateKey});
 };
 
   
@@ -263,21 +266,24 @@ const handleTaskSubmit = async () => {
   };
 
   try {
-    const url = isEditing ? `/api/tasks/${editedTask._id}` : "/api/tasks";
+    const url = isEditing ? `tasks/${editedTask._id}` : "tasks";
     const method = isEditing ? "PUT" : "POST";
 
-    const response = await fetch(url, {
-      method,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(task)
-    });
+   const response = await axios({
+    url,
+    method,
+    headers: {
+      "Authorization": `Bearer ${token}`
+    },
+    data: task,
+  });
+      await fetchTasks();
+      setSelectedDateObjD(new Date(selectedDateKey));
 
-    if (!response.ok) throw new Error("Failed to save task");
+  const savedTask = response.data;
 
-    const savedTask = await response.json();
+
+
     const updatedTasks = [...tasks];
 
     if (isEditing) {

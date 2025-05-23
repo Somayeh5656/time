@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { HiMenu, HiSearch, HiUser, HiX } from 'react-icons/hi';
 import "./navbar.css";
 import { Link } from "react-router-dom";
-import LogOut from "../../utils/logOut";
+
 
 const Navbar = ({loggedIn,setLoggedIn}) => {
   const [menuOpen, setMenuOpen] = useState(false);
