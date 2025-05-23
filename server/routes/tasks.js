@@ -43,7 +43,7 @@ router.post("/", authenticateUser, async (req, res) => {
 // Päivitä tehtävä (hae ID esim. otsikko+ajat)
 router.put("/", authenticateUser, async (req, res) => {
   try {
-    const { title, start, end, repeat } = req.body;
+    const { title, start, end, repeat, date } = req.body;
 
     const task = await Task.findOneAndUpdate(
       {
