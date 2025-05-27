@@ -7,6 +7,7 @@ const Layout = ({loggedIn, setLoggedIn})=> {
             <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
             <main>
                 <Outlet />
+                
             </main> 
         
         

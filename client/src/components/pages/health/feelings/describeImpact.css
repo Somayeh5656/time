@@ -3,8 +3,9 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 80%;
-  padding: 2rem 0rem;
+ 
+
+  padding: 2rem 7rem;
   background-color: black;
   font-family:'Times New Roman', Times, serif;
 }
@@ -21,7 +22,8 @@
 }
 
 .back-icon{
-    margin-bottom: 12px;
+    margin-top: 4px;
+    margin-right: 5px;
 }
 
 .describe-impact-container p {

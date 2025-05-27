@@ -202,8 +202,6 @@
   
 
   font-size: 24px;
- 
-  
 
 }
 
@@ -225,9 +223,11 @@
 
 
 
-.tag {
-  background: white;
+.term-tag {
+  background-color: #cfe0e4;
+  
   color: #222;
+  
   
   padding: 3.3px 7.4px;
   margin-left: 20px;

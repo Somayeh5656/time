@@ -20,9 +20,10 @@ const emotionTimes = {
   anger: [169.201],
 };
 
-const Feelings = ({ onClose }) => {
+const Feelings = ({ onBack, onSelectEmotion }) => {
   const [emotion, setEmotion] = useState("neutral");
   const [showDescribeImpact, setShowDescribeImpact] = useState(false);
+
   const audioRef = useRef(null);
   const navigate= useNavigate();
 
@@ -54,18 +55,17 @@ const Feelings = ({ onClose }) => {
     }
   }, [emotion]);
 
+   const resetFlow = () => {
+    setShowDescribeImpact(false);
+    setEmotion("neutral");
+  };
+
   return (
     <div className="feeling-container">
-      {showDescribeImpact ? (
-        <DescribeImpact
-          emotion={emotion}
-          onBack={() => setShowDescribeImpact(false)}
-        />
-      ) : (
-        <>
+
           {/* Back Button */}
           <div className="back-button">
-            <IoIosArrowBack onClick={()=>navigate("/")} />
+            <IoIosArrowBack onClick={onBack} />
           </div>
 
           {/* 3D Galaxy Marble */}
@@ -105,12 +105,12 @@ const Feelings = ({ onClose }) => {
           {/* Next Button */}
           <button
             className={`next-button ${emotion}`}
-            onClick={() => setShowDescribeImpact(true)}
+            onClick={() => onSelectEmotion(emotion)}
           >
             Next
           </button>
-        </>
-      )}
+       
+      
     </div>
   );
 };

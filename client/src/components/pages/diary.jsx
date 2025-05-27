@@ -8,6 +8,8 @@ import { FaRegPauseCircle } from "react-icons/fa";
 import { PiNotePencilFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import axios from "../../utils/axios";
+
 
 const Diary = () => {
   const [text, setText] = useState("");
@@ -20,18 +22,64 @@ const Diary = () => {
   const date = new Date().toLocaleDateString();
   const navigate=useNavigate();
 
-  const handleSave = () => {
+useEffect(() => {
+  const fetchNotes = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    try {
+      const res = await axios.get("/diaries", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("Fetched notes:", res.data);
+      setNotes(res.data);
+    } catch (e) {
+      console.error("Failed to fetch notes", e);
+    }
+  };
+  fetchNotes();
+
+  audioRef.current = new Audio("/audio/laPetiteFilleDeLaMer.mp3");
+  audioRef.current.loop = true;
+  audioRef.current.play();
+  setIsPlaying(true);
+
+  return () => {
+    audioRef.current.pause();
+    audioRef.current = null;
+  };
+}, []);
+
+const handleSave = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return alert("Please log in");
+
+  try {
     if (mode === "new") {
-    setNotes((prev) => [...prev, { text, date: new Date().toLocaleDateString() }]);
+      const res = await axios.post("/diaries", { text, date: new Date().toLocaleDateString() }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("Saved new note:", res.data);
+      setNotes((prev) => [res.data, ...prev]);
     } else if (mode === "edit" && selectedNoteIndex !== null) {
-    const updated = [...notes];
-    updated[selectedNoteIndex].text = text;
-    setNotes(updated);
-}
+      const note = notes[selectedNoteIndex];
+      const res = await axios.put(`/diaries/${note._id}`, { text }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("Updated note:", res.data);
+      const updatedNotes = [...notes];
+      updatedNotes[selectedNoteIndex] = res.data;
+      setNotes(updatedNotes);
+    }
     setMode("view");
     setText("");
     setSelectedNoteIndex(null);
-  };
+  } catch (e) {
+    console.error("Failed to save note", e);
+    alert("Failed to save note");
+  }
+};
+
+
 
   const handleNewNote = () => {
     setText("");
@@ -39,19 +87,27 @@ const Diary = () => {
     setSelectedNoteIndex(null);
   };
 
+
   const handleEditNote = (index) => {
   setText(notes[index].text);
   setSelectedNoteIndex(index);
   setMode("edit");
 };
 
-const handleDeleteNote = (index) => {
+
+const handleDeleteNote = async (index) => {
   const confirmed = window.confirm("Are you sure you want to delete this note?");
   if (!confirmed) return;
+  const token = localStorage.getItem("token");
+  if (!token) return alert("Please log in");
 
-  setNotes((prevNotes) => prevNotes.filter((_, i) => i !== index));
-  
-  // Jos poistettiin muokattava merkintä, nollaa tilat
+  const note = notes[index];
+  await axios.delete(`/diaries/${note._id}`, {
+  headers: { Authorization: `Bearer ${token}` }
+});
+
+  setNotes((prev) => prev.filter((_, i) => i !== index));
+
   if (index === selectedNoteIndex) {
     setText("");
     setSelectedNoteIndex(null);
@@ -59,21 +115,15 @@ const handleDeleteNote = (index) => {
   }
 };
 
+
+
   const handleThemeToggle = () => {
     setIsDark((prev) => !prev);
   };
 
-  useEffect(() => {
-    audioRef.current = new Audio("/audio/laPetiteFilleDeLaMer.mp3");
-    audioRef.current.loop = true;
-    audioRef.current.play();
-    setIsPlaying(true);
 
-    return () => {
-      audioRef.current.pause();
-      audioRef.current = null;
-    };
-  }, []);
+
+
 
   const togglePlay = () => {
     if (!isPlaying) {
@@ -84,10 +134,11 @@ const handleDeleteNote = (index) => {
     setIsPlaying(!isPlaying);
   };
 
+
   return (
     <div className={`diary-container ${isDark ? "light" : "dark"}`}>
       <div className="header-controls">
-        <span className="back-button-diary" onClick={()=>navigate("/")}>
+        <span className="back-button-diary" onClick={()=>navigate("/routines")}>
           <IoIosArrowBack size={28} />
         </span>
 

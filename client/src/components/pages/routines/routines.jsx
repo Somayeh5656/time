@@ -122,7 +122,6 @@ const getTasksForSelectedDate=()=> {
         (task,index,self)=>
         index===self.findIndex(
         (t)=> 
-        t.id===task.id &&  
         t.title===task.title &&
         t.start===task.start && 
         t.end===task.end &&
@@ -269,21 +268,19 @@ const handleTaskSubmit = async () => {
     const url = isEditing ? `tasks/${editedTask._id}` : "tasks";
     const method = isEditing ? "PUT" : "POST";
 
-   const response = await axios({
-    url,
-    method,
-    headers: {
-      "Authorization": `Bearer ${token}`
-    },
-    data: task,
-  });
-      await fetchTasks();
-      setSelectedDateObjD(new Date(selectedDateKey));
+    const response = await axios({
+      url,
+      method,
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
+      data: task,
+    });
 
-  const savedTask = response.data;
+    await fetchTasks();
+    setSelectedDateObjD(new Date(selectedDateKey));
 
-
-
+    const savedTask = response.data;
     const updatedTasks = [...tasks];
 
     if (isEditing) {
@@ -295,11 +292,12 @@ const handleTaskSubmit = async () => {
     setTasksForDate(selectedDateKey, updatedTasks);
     setShowFormBol(false);
     setEditingIndex(null);
-    setNewTaskObj({ title: "", start: "", end: "", repeat: "" });
+    setNewTaskObj({ title: "", start: "", end: "", repeat: "", date: selectedDateKey });
   } catch (error) {
-    console.error("Error submitting task:", error);
+    console.error("Failed to save task:", error);
   }
 };
+
 
 
 

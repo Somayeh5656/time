@@ -1,119 +1,107 @@
-.review-container {
-   position: fixed; /* Näkyy koko ruudun päällä */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow-y: auto;
- 
-  z-index: 9999;
-
-
-  
-  margin: 50px auto;
-  background-color: black;
-  color: white;
+.emotion-review {
+  padding: 2rem;
+  max-width: 700px;
   font-family: 'Times New Roman', Times, serif;
-  padding: 30px;
-  border-radius: 4px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
- 
-  
+  color: #333;
 }
 
-.review-header {
+.emotion-review-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
+  margin-bottom: 4rem;
+}
+
+.emotion-review-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.log-new-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 3px;
   cursor: pointer;
-  margin-bottom: 30px;
+  font-weight: 100;
+  transition: background-color 0.2s ease;
 }
 
-.timestamp {
-  font-size: 14px;
-  color: gray;
+.log-new-button:hover {
+  background-color: rgb(156, 154, 154);
 }
 
-
-.emotion-name {
-  margin: 0;
-  font-size: 28px;
-  color: white;
+.no-entries {
   text-align: center;
-  margin-bottom: 59px;
+  font-style: italic;
+  color: #888;
+  margin-top: 4rem;
 }
 
-
-.feeling-header,
-.impact-header {
-
-  font-size: 23px;
+.log-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
+}
+
+.log-item {
+  background-color: #f9f9f9;
+  border-left: 4px solid black;
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 1rem;
   border-radius: 3px;
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  position: relative;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.3s ease-in;
 }
 
-.feeling-header::after,
-.impact-header::after {
-  content: "";
-  display: block;
-  height: 1px;
-  background-color: white;
-  margin-top: 8px;
-  opacity: 0.5;
+.log-item strong {
+  font-size: 1.1rem;
+  text-transform: capitalize;
 }
 
-.review-content ul {
-  margin: 0;
-
-  list-style-type: none;
-  
-}
-
-.review-content li::before {
-  content: "- "; /* Viiva ennen tekstiä */
-  color: white;
-}
-
-.review-content li {
-  font-size: 16px;
-  color: white;
-  
-}
-
-.review-content {
+.log-header{
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  justify-content: space-between;
   
 }
 
-.feeling-grid,
-.impact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); /* max 5 per rivi */
-  gap: 15px;
-  margin-top: 5px;
+.delete-log{
+  margin-top:2px;
+  cursor: pointer;
+}
+
+.log-meta {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  margin-left:-18px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+}
+
+.log-tags {
+  margin-top: 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  
   
 }
 
-.feeling-item,
-.impact-item {
-  background-color: #222;
-  padding: 8px 12px;
+.tag {
+  background-color: #cacacd;
+  color: black;
   border-radius: 3px;
-  text-align: center;
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border: 1px solid #555;
+  font-size: 0.76rem;
+  margin-top: 0.33rem;
 }
 
+.tag.impact {
+  background-color: #cedff3;
+  color: black;
+}
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -44,13 +44,13 @@ const Navbar = ({loggedIn,setLoggedIn}) => {
             <li><Link to="/goals"  onClick={()=> setMenuOpen(false)}>Goals</Link></li>
             <li><Link to="/diary" onClick={()=> setMenuOpen(false)}>Diary</Link></li>
            
-            <li><Link to="/feelings" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
+            <li><Link to="/emotionReview" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
           </ul>
         </nav>
 
         <div className="right-icon">
         {loggedIn ? (
-          <span className="logout-btn" onClick={()=>{handleLogout()}} >Sign Out</span>
+          <Link to ="/account" className="logout-btn" onClick={()=>{handleLogout()}} >Sign Out</Link>
         ) : (
           <Link to="/account">
             <HiUser />
@@ -74,9 +74,9 @@ const Navbar = ({loggedIn,setLoggedIn}) => {
             <li><Link to="/goals" onClick={()=> setMenuOpen(false)}>Goals </Link></li>
              <li><Link to="/diary" onClick={()=> setMenuOpen(false)}>Diary</Link></li>
 
-            <li><Link to="/feelings" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
+            <li><Link to="/emotionReview" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
             {loggedIn ? (
-           <li><span className="logout-btn" onClick={()=>{handleLogout();toggleMenu();}}>Sign Out</span></li>
+           <li><Link to="/account" className="logout-btn" onClick={()=>{handleLogout();toggleMenu();}}>Sign Out</Link ></li>
         ) : (
           <li><Link to="/account" onClick={() => setMenuOpen(false)}>Account</Link></li>
           )}

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 const SignIn = ({setLoggedIn})=>{
     const navigate= useNavigate();
     const [formData, setFormData]=useState({
@@ -30,7 +31,7 @@ const SignIn = ({setLoggedIn})=>{
             
             setLoggedIn(true)
                 alert("Login successful")
-                navigate("/");
+                navigate("/routines");
 
         }catch(error){
             console.error("Login error:", error);

@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import ShowMore from "./showMore";
 import "./describeImpact.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import EmotionReview from "./emotionReview";
-import { useNavigate } from "react-router-dom";
-import Feelings from "./feelings";
-import Health from "../health";
 
 const emotionFeelingMap = {
   fear: ["Anxious", "Insecure", "Terrified", "Nervous", "Worried"],
@@ -23,24 +19,31 @@ const impactOptions = [
 
 const allFeelings = [...new Set(Object.values(emotionFeelingMap).flat())];
 
-const DescribeImpact = ({ emotion, onBack, onNext }) => {
+const DescribeImpact = ({
+  emotion,
+  onBack,
+  resetFlow,
+  selectedFeelings,
+  setSelectedFeelings,
+  selectedImpacts,
+  setSelectedImpacts,
+  onDone,
+}) => {
   const [showMore, setShowMore] = useState(false);
-  const [selectedFeelings, setSelectedFeelings] = useState([]);
-  const [selectedImpacts, setSelectedImpacts] = useState([]);
-  const [review, setReview] = useState(false);
-  const [timestamp, setTimestamp] = useState(null);
-  const navigate=useNavigate();
-
 
   const toggleFeeling = (feeling) => {
     setSelectedFeelings((prev) =>
-      prev.includes(feeling) ? prev.filter((f) => f !== feeling) : [...prev, feeling]
+      prev.includes(feeling)
+        ? prev.filter((f) => f !== feeling)
+        : [...prev, feeling]
     );
   };
 
   const toggleImpact = (impact) => {
     setSelectedImpacts((prev) =>
-      prev.includes(impact) ? prev.filter((i) => i !== impact) : [...prev, impact]
+      prev.includes(impact)
+        ? prev.filter((i) => i !== impact)
+        : [...prev, impact]
     );
   };
 
@@ -57,19 +60,6 @@ const DescribeImpact = ({ emotion, onBack, onNext }) => {
     );
   }
 
-    if (review) {
-    return (
-        <EmotionReview
-        emotion={emotion}
-        feelings={selectedFeelings}
-        impacts={selectedImpacts}
-        timestamp={timestamp}
-        onBack={() => setReview(false)}
-        done={() => navigate(-1)} // korvaa halutulla reitillä
-        />
-    );
-}
-
   return (
     <div className="describe-impact-container">
       <div className="header">
@@ -79,7 +69,9 @@ const DescribeImpact = ({ emotion, onBack, onNext }) => {
         </span>
       </div>
 
-      <h2 className={`emotion-name ${emotion}`}>{emotion.charAt(0).toUpperCase() + emotion.slice(1)}</h2>
+      <h2 className={`emotion-name ${emotion}`}>
+        {emotion.charAt(0).toUpperCase() + emotion.slice(1)}
+      </h2>
       <p>What best describes this feeling?</p>
 
       <div className="feeling-tags">
@@ -93,15 +85,11 @@ const DescribeImpact = ({ emotion, onBack, onNext }) => {
           </button>
         ))}
       </div>
-      
 
       <div className="header show-more-header">
         <span className="show-more-text" onClick={() => setShowMore(true)}>
-            Show More 
-
-            <span className="show-more-icon">
-            <IoIosArrowForward />
-            </span>
+          Show More
+          <span className="show-more-icon"><IoIosArrowForward /></span>
         </span>
       </div>
 
@@ -120,18 +108,14 @@ const DescribeImpact = ({ emotion, onBack, onNext }) => {
       </div>
 
       <div className="next-footer">
-       <button
-            onClick={() => {
-                setTimestamp(new Date());
-                setReview(true);
-            }}
-            className={`describe-impact-next-button ${emotion}`}
-            disabled={selectedFeelings.length === 0 && selectedImpacts.length === 0}
-            >
-            Next
+        <button
+          onClick={onDone}
+          className={`describe-impact-next-button ${emotion}`}
+          disabled={selectedFeelings.length === 0 && selectedImpacts.length === 0}
+        >
+          Next
         </button>
       </div>
-
     </div>
   );
 };
