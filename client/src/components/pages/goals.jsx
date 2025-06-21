@@ -185,7 +185,7 @@ const Goals = () => {
   
 
   const removeGoal= async(id)=>{
-    const token=localStorrage.getItem("token");
+    const token=localStorage.getItem("token");
     if(!token) return;
 
     try{

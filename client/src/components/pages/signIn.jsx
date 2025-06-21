@@ -65,4 +65,4 @@ const SignIn = ({setLoggedIn})=>{
     );
 };
 
-export default SignIn
+export default SignIn;
