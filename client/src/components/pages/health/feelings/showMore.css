@@ -1,32 +1,35 @@
+/* Päälokero laajennetulle tunteiden listalle */
 .expanded-feeling-list {
   display: flex;
-  flex-direction: column;
-  width:100%;
-  padding: 45px;
-  background-color:rgb(34, 34, 34);
-  box-sizing: border-box;
+  flex-direction: column;  /* Pinoaa sisällöt pystysuunnassa */
+  width: 100%;              /* Vie koko käytettävissä olevan leveyden */
+  padding: 45px;            /* Sisäinen tyhjä tila reunoille */
+  background-color: rgb(34, 34, 34);  /* Tumma taustaväri */
+  box-sizing: border-box;   /* Padding ei kasvata elementin kokoa */
 }
 
+/* Ylätunniste, jossa on Cancel- ja Done-painikkeet */
 .show-more-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Asettaa Cancel ja Done reunoille */
   align-items: center;
-
-
 }
 
+/* Yhteiset tyylit Cancel- ja Done-teksteille */
 .show-more-header .cancel-text,
 .show-more-header .done-button {
   font-size: 17px;
   color: white;
-  cursor: pointer;
+  cursor: pointer;  /* Vaihtaa osoittimen klikattavaksi */
 }
 
+/* Hover-efekti painikkeille: kasvattaa fonttikokoa */
 .cancel-text:hover,
 .done-button:hover {
   font-size: 19px;
 }
 
+/* Kysymysteksti ennen tunnelistaa */
 .show-more-question {
   margin-top: 20px;
   margin-bottom: 12px;
@@ -34,48 +37,49 @@
   color: white;
 }
 
+/* Lista tunteista pystysuunnassa */
 .feeling-list-vertical {
   display: flex;
-  flex-direction: column;
-  gap: 13px;
+  flex-direction: column;  /* Näyttää tunteet pystyrivissä */
+  gap: 13px;               /* Väli rivien välillä */
   color: white;
   border-radius: 3px;
-  background-color: rgb(60, 60, 60);
-  padding:20px;
+  background-color: rgb(60, 60, 60);  /* Keskiharmaa tausta */
+  padding: 20px;
   margin-top: 10px;
-
 }
 
+/* Yksittäinen tunne-elementti listassa */
 .feeling-row {
   display: flex;
   align-items: center;
   cursor: pointer;
   padding: 8px 12px;
   transition: background-color 0.2s ease;
-  border-bottom: 1px solid rgb(63, 63, 63);
-  
+  border-bottom: 1px solid rgb(63, 63, 63); /* Hento erotusviiva */
 }
 
-
-
+/* Tunteen nimi */
 .feeling-text {
   font-size: 16px;
-  margin-left: 20px;
+  margin-left: 20px; /* Etäisyys ympyrästä */
 }
 
+/* Hover-efekti: suurentaa fonttia hieman */
 .feeling-text:hover {
   font-size: 18px;
 }
 
+/* Valintaympyrä tunteen edessä */
 .circle {
   width: 20px;
   height: 20px;
   border: 2px solid #777474;
-  border-radius: 50%;
+  border-radius: 50%;  /* Muodostaa ympyrän */
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-
+/* Täytetty ympyrä, kun tunne on valittu */
 .circle.filled {
   background-color: white;
   border-color: grey;

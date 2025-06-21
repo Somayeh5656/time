@@ -9,7 +9,6 @@ const diariesRoutes= require('./routes/diaries')
 const goalsRoutes=require('./routes/goals')
 const emotionsRoutes=require('./routes/emotions')
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());

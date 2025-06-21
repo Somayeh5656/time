@@ -95,11 +95,12 @@
   
 }
 
-.action-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+.goal-header select,
+.goal-block input {
+  padding: 0.5rem;
+  flex: 1;
+  margin-bottom: 30px;
+  color: black;
   
 }
 
@@ -136,17 +137,13 @@
   color: black;
   align-items: center;
   font-family: 'Times New Roman', Times, serif;
-
-
 }
 
 .add-step svg{
   color: black;
   font-size: 22px;
   margin-right: 10px;
-  vertical-align: center;
   
-
 }
 
 

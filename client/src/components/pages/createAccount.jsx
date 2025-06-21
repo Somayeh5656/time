@@ -5,7 +5,6 @@ import axios from "../../utils/axios"
 import { useNavigate } from "react-router-dom";
 
 
-
 const CreateAccount = ()=>{
     const [formData, setFormData]=useState({
         username:"",
@@ -80,6 +79,7 @@ const CreateAccount = ()=>{
             </form>
 
         </div>
+
         
     );
 };

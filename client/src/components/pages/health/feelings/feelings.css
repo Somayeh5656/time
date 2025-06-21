@@ -1,119 +1,108 @@
-/* Feelings.css */
-
-.feeling-container {
-  position: fixed;
-  top: 60px;
-  left: 0px;
+.feeling-container{
   display: flex;
   flex-direction: column;
   background-color: black;
-  width: 100vw;
+  width:100vw;
   height:100vh;
   align-items: center;
-  animation: foldUp 0.9s ease;
-  overflow: hidden;
-  z-index: 999;
-  overflow-y: auto;
-  max-width: 100vw;
-  max-height: 100vh;
-
-}
-
-.back-button {
-  color: white; 
-  font-size: 30px;
-  position: absolute;
+  position:fixed;
   top:60px;
-
-
-  left: 50px;
-  z-index: 10;
-  cursor: pointer;
+  left:0px;
 }
 
-.canvas-container {
+.back-button{
+  position:absolute;
+  top:60px;
+  left:30px;
+  color:white;
+  cursor:pointer;
+  font-size:30px;
+  z-index:10;
+
+}
+
+.canvas-container{
   width:100vw;
-  height: 60vh;
+  height:60vh;
+  
 }
 
 .emotion-label{
-  color: white;
-  border: none;
-  font-family:'Times New Roman', Times, serif;
-  transition: box-shadow 0.9s ease;
+  color:white;
+  border:none;
+  font-family: 'Times New Roman', Times, serif;
   text-shadow: 0 0 20px white;
-  font-size: 13px;
+  transition:box-shadow 0.9s ease;
+  font-size:13px;
+
 }
 
-.emotion-slider {
+.emotion-slider{
   margin-top:10px;
-  width: 70%;
+  width:70%;
   -webkit-appearance: none;
-  border-radius: 30px;
-  padding:0 ;
-  box-shadow: 0 0 20px black;
+  border-radius:30px;
+  padding:0;
+  box-shadow:0 0 20px white;
   transition: box-shadow 0.9s ease;
-  background-color:rgba(255, 251, 251, 0.875);
-  display: block;
-  cursor: pointer;
-  color:black;
-  outline:none;
+  background-color: rgba(255,251,255,0.892);
+  cursor:pointer;
   height:8px;
-   -webkit-appearance: none; /* Poistaa natiivin WebKit-tyylin */
-  width: 70%;
-  height: 8px;
   padding:0 6px;
-  margin-top: 36px;
+  margin-top:36px;
+  display:block;
 }
 
 .emotion-slider::-webkit-slider-thumb{
-  -webkit-appearance: none;
+  -webkit-appearance:none;
   height:22px;
   width:11px;
-  
   box-shadow: 0 0 20px white;
-  background-color:black;
+  background-color: black;
   margin-top:-7px;
-  
+
+
 }
 
-.next-button {
+
+
+.next-button{
   width:70%;
-  max-width:660px;
-
-  margin: 0 auto;
-  display: block;
-  padding: 4px 60px;
-  font-size: 13px;
-  border-radius: 3px;
-  cursor: pointer;
-  color: white;
-  border: none;
+  max-width: 660px;
+  cursor:pointer;
   font-family:'Times New Roman', Times, serif;
-  transition: box-shadow 0.9s ease;
-  background-color:black;
-  box-shadow: 0px 0px 10px black;
-  
+  background-color: black;
+  color: white;
+  box-shadow: 0 0 20px white;
+  border:none;
+  border-radius: 3px;
+  transition : box-shadow 0.9s ease;
+  font-size:13px;
 }
 
-.emotion-slider.fear,.next-button.fear {
-  box-shadow: 0 0 10px #550055;
+
+.emotion-slider.fear,
+.next-button.fear {
+  box-shadow: 0 0 10px #550055; /* tumma violetti */
 }
 
-.emotion-slider.sadness,.next-button.sadness {
-  box-shadow: 0 0 10px #005577;
+.emotion-slider.sadness,
+.next-button.sadness {
+  box-shadow: 0 0 10px #005577; /* sinertävä */
 }
 
-.emotion-slider.neutral,.next-button.neutral {
-  box-shadow: 0 0 10px #cccccc;
-  
+.emotion-slider.neutral,
+.next-button.neutral {
+  box-shadow: 0 0 10px #cccccc; /* harmaa */
 }
 
-.emotion-slider.joy,.next-button.joy {
-  box-shadow: 0 0 10px #ffee33;
-  
+.emotion-slider.joy,
+.next-button.joy {
+  box-shadow: 0 0 10px #ffee33; /* keltainen */
 }
 
-.emotion-slider.anger,.next-button.anger {
-  box-shadow: 0 0 10px #7e1313;
+.emotion-slider.anger,
+.next-button.anger {
+  box-shadow: 0 0 10px #7e1313; /* tumma punainen */
 }
+

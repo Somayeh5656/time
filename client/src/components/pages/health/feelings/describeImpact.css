@@ -84,7 +84,7 @@
 }
 
 .show-more-icon {
-    margin-bottom: 11px;
+    margin-top: 5px;
   
 }
 
@@ -95,13 +95,13 @@
 }
 
 .impact-tags {
-  display: flex;
-  grid-template-columns: repeat(6, 1fr);
+  display:grid;
+  grid-template-columns:repeat(auto-fit , minmax(120px,1fr));
   gap: 10px;
   margin-top: 10px;
   width:90%;
-  flex-wrap: wrap;
-  margin-bottom: 45px;
+
+  margin-bottom: 59px;
 }
 
 .next-footer {
@@ -130,6 +130,11 @@
     margin-top: 50px;
    
     
+}
+
+.describe-impact-next-button:disabled {
+  cursor: not-allowed;
+  
 }
 
 
