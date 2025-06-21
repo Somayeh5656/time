@@ -104,6 +104,12 @@
   margin-bottom: 59px;
 }
 
+.impact-tags:hover {
+ 
+  padding: 13px 23px;
+  font-size: 14px;
+  background-color: rgb(51, 49, 49);
+}
 .next-footer {
   width: 100%;
   display: flex;
