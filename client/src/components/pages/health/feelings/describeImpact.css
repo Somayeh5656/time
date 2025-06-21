@@ -60,7 +60,7 @@
   background-color: rgb(51, 49, 49);
 }
 
-.tag-button.active {
+.tag-button.active, .impact-tags.active{
   background-color: rgb(170, 175, 176);
   color: black;
   border: 1px solid white;
@@ -100,16 +100,10 @@
   gap: 10px;
   margin-top: 10px;
   width:90%;
-
   margin-bottom: 59px;
 }
 
-.impact-tags:hover {
- 
-  padding: 13px 23px;
-  font-size: 14px;
-  background-color: rgb(51, 49, 49);
-}
+
 .next-footer {
   width: 100%;
   display: flex;
