@@ -106,7 +106,7 @@ const DescribeImpact=({
             onClick={()=>{
               toggleImpact(impact)
             }}
-            className={`tag-button-describe-impact${selectedImpacts.includes(impact)? "active":""}`}            
+            className={`tag-button-describe-impact ${selectedImpacts.includes(impact)? "active":""}`}            
             >
               {impact}
             </button>

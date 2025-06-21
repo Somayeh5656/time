@@ -17,7 +17,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/myapp
+      - MONGO_URI=mongodb+srv://somayehmozaffari:UpSIF3Ez4fpv9Bil@cluster0.tffqycp.mongodb.net/
       - PORT=5000
     volumes:
       - ./server:/app

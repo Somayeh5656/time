@@ -60,7 +60,7 @@
   background-color: rgb(51, 49, 49);
 }
 
-.tag-button-describe-impact.active, .impact-tags.active{
+.tag-button-describe-impact.active{
   background-color: rgb(170, 175, 176);
   color: black;
   border: 1px solid white;
