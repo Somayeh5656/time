@@ -1,4 +1,5 @@
 import Navbar from "./containers/navbar";
+import Routines from "./pages/routines/routines";
 import {Outlet} from "react-router-dom";
 
 const Layout = ({loggedIn, setLoggedIn})=> {

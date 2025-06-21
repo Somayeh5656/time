@@ -24,6 +24,7 @@ function App() {
         <Routes>
           
           <Route path="/" element={<Layout loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}>
+            <Route index element={<Routines/>}></Route>
             <Route path="/account" element= {<Account loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}></Route>
             <Route path="/goals" element= {<Goals />}></Route>
             <Route path="/emotionReview" element= {<EmotionReview />}></Route>
