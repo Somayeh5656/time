@@ -38,22 +38,6 @@ const Goals = () => {
     fetchGoals();
   }, []);
 
-  useEffect(()=>{
-    const fetchGoals=async()=>{
-      const token= localStorage.getItem("token");
-      try{
-        const res= await axios.get("./goals", {
-          headers:{ Authorization: ` Bearer ${token}`}
-        });
-        setGoals(res.data);
-      }catch(e){
-        console.error("Failed to fetch goals",e)
-
-      }
-    }
-    fetchGoals;
-
-  },[])
 
   // Uuden tavoitteen luonti
   const addGoal = async () => {
@@ -190,8 +174,8 @@ const Goals = () => {
 
     try{
       await axios.delete(`./goals/${id}`,{headers:{
-        Authorization:` Bearer${token} `}});
-        setGoals(prev=> prev.filter(g._id !== id));
+        Authorization:`Bearer ${token} `}});
+        setGoals(prev=> prev.filter(g=> g._id !== id));
     }catch(e){
       console.error("Fialed to delete goal",e);
     }
