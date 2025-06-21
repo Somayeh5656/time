@@ -82,7 +82,7 @@ const DescribeImpact=({
           <button
           key={feeling}
           onClick={()=>toggleFeeling(feeling)}
-          className={`tag-button ${selectedFeelings.includes(feeling)? "active" :""}`}
+          className={`tag-button-describe-impact ${selectedFeelings.includes(feeling)? "active" :""}`}
           >
             {feeling}
           </button>
@@ -106,7 +106,7 @@ const DescribeImpact=({
             onClick={()=>{
               toggleImpact(impact)
             }}
-            className={`tag-button${selectedImpacts.includes(impact)? "active":""}`}            
+            className={`tag-button-describe-impact${selectedImpacts.includes(impact)? "active":""}`}            
             >
               {impact}
             </button>

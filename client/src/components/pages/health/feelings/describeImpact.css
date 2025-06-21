@@ -40,7 +40,7 @@
   margin-bottom: 1.5rem;
 }
 
-.tag-button {
+.tag-button-describe-impact {
     background-color: black;
   color: white;
   border-color: white;
@@ -53,14 +53,14 @@
   cursor: pointer;
 }
 
-.tag-button:hover {
+.tag-button-describe-impact:hover {
  
   padding: 13px 23px;
   font-size: 14px;
   background-color: rgb(51, 49, 49);
 }
 
-.tag-button.active, .impact-tags.active{
+.tag-button-describe-impact.active, .impact-tags.active{
   background-color: rgb(170, 175, 176);
   color: black;
   border: 1px solid white;
