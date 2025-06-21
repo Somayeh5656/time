@@ -27,7 +27,7 @@ const Goals = () => {
         return;
       }
       try {
-        const res = await axios.get("/goals", {
+        const res = await axios.get("./goals", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setGoals(res.data);
