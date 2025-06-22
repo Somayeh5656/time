@@ -47,7 +47,7 @@ router.post("/", authenticateUser, async (req, res) => {
 });
 
 // Päivitä tehtävä (hae ID esim. otsikko+ajat)
-router.put(":id",authenticateUser,async(req,res)=>{
+router.put("/:id",authenticateUser,async(req,res)=>{
   try{
     const updatedDiaries= await Diary.findOneAndUpdate(
       {
@@ -73,7 +73,7 @@ router.delete("/:id", authenticateUser, async(req,res)=>{
   try{
     const deletedDiary= await Diary.findOneAndDelete({
       _id: req.params.id,
-      userId: req-user.userId
+      userId: req.user.userId
     });
 
     if(!deletedDiary) return res.status(404).json({message:"Diary not found"});
