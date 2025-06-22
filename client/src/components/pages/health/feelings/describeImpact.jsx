@@ -124,12 +124,8 @@ const DescribeImpact=({
           Next
         </button>
       </div>
-
     </div> 
-    
-
   )
-
 
 }
 export default DescribeImpact;
