@@ -66,7 +66,7 @@ const Diary = () => {
         setNotes((prev) => [res.data, ...prev]);
       } else if (mode === "edit" && selectedNoteIndex !== null) {
         const note = notes[selectedNoteIndex];
-        const res = await axios.put(`/diaries/${note._id}`, { text }, {
+        const res = await axios.put(`/diaries/${note._id}`, { text ,date }, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const updatedNotes = [...notes];
