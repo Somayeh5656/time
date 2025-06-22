@@ -29,7 +29,7 @@ const Navbar = ({loggedIn,setLoggedIn}) => {
 
         <div className="left-icons">
           <i className="menu-icon" onClick={toggleMenu}><HiMenu /></i>
-          <i className="search-icon"><HiSearch /></i>
+          {/*<i className="search-icon"><HiSearch /></i>*/}
         </div>
 
         <div className="logo-text">
