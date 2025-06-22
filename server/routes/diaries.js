@@ -24,7 +24,7 @@ const authenticateUser=(req, res, next)=>{
 
 router.get("/",authenticateUser, async(req,res)=>{
   try{
-    const Diaries=await Diary.find({userID: req.user.userId})
+    const Diaries=await Diary.find({userId: req.user.userId})
     res.json(Diaries);
 
   }catch(e){
