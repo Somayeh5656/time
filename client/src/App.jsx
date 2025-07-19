@@ -10,8 +10,7 @@ import SignIn from './components/pages/signIn';
 import Goals from './components/pages/goals';
 import CreateAccount from './components/pages/createAccount';
 import EmotionReview from './components/pages/health/feelings/emotionReview';
-
-
+import Birthday from './components/pages/birthday/birthday';
 
 
 function App() {
@@ -33,6 +32,7 @@ function App() {
             <Route path="/diary" element= {<Diary />}></Route>         
             <Route path="/signIn" element={<SignIn setLoggedIn={setLoggedIn} />}></Route>
             <Route path="/createAccount" element={< CreateAccount/>}></Route>
+            <Route path="/birthday" element={<Birthday />}></Route>
            
             
           </Route>

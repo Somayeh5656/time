@@ -1,0 +1,35 @@
+
+.after-blow {
+  background: #ffd6e7; /* vaaleampi vaaleanpunainen */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(255, 153, 204, 0.4);
+}
+
+.after-blow h2 {
+  color: #cc0066; /* tumma pinkki */
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+}
+
+.after-blow p {
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+  color: #800040;
+}
+
+.after-blow button {
+  background-color: #ffb3d9; /* vaaleanpunainen nappi */
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color 0.3s;
+}
+
+.after-blow button:hover {
+  background-color: #ff99cc; /* hieman tummempi hover */
+}

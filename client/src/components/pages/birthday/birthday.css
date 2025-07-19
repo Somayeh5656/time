@@ -1,0 +1,51 @@
+.birthday {
+  max-width: 400px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.birthday-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.birthday-form input {
+  margin: 0.2em 1em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  resize: none;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+.birthday-form textarea {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  resize: none;
+  margin: 0.2em 1em;
+  padding:0.7em 7.3em 2em 1em;
+  
+}
+
+
+
+.birthday-form button {
+  background-color: pink;
+  padding: 0.6em;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.birthday-form button:hover {
+  background-color: hotpink;
+  color: white;
+}
