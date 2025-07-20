@@ -1,51 +1,50 @@
 .birthday {
   max-width: 400px;
-  margin: 50px auto;
+  margin: 50px auto;          /* keskitys horisontaalisesti ja väli ylhäältä/alhaalta */
+  padding: 0px 20px;            /* jättää vähän väliä sivuille pienillä näytöillä */
   text-align: center;
+  box-sizing: border-box;     /* ottaa paddingin mukaan leveyslaskuun */
 }
 
 .birthday-form {
+  margin:40px 0px;
   display: flex;
   flex-direction: column;
   gap: 1em;
   font-family: 'Times New Roman', Times, serif;
 }
 
-.birthday-form input {
-  margin: 0.2em 1em;
+.birthday-form input,
+.birthday-form textarea {
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 2px;
   resize: none;
   font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
+  width: 100%;                /* täyttää .birthday-containerin leveyden */
+  box-sizing: border-box;     /* tärkeä: estää leveysylitykset paddingin kanssa */
+  margin: 0;                  /* poistaa ylimääräiset marginaalit */
 }
-
-
 
 .birthday-form textarea {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  resize: none;
-  margin: 0.2em 1em;
-  padding:0.7em 7.3em 2em 1em;
-  
+  height: 100px;              /* tai muuta sopivaksi */
 }
 
-
-
 .birthday-form button {
-  background-color: pink;
+  background-color: rgb(250, 228, 235);
   padding: 0.6em;
   border: none;
   font-weight: bold;
   cursor: pointer;
   border-radius: 2px;
   transition: background-color 0.2s ease;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 0.88em;
 }
 
+
 .birthday-form button:hover {
-  background-color: hotpink;
+  background-color: rgb(242, 187, 215);
   color: white;
 }

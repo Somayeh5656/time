@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Card from './card';
 import Greeting from './greeting';
@@ -8,6 +8,31 @@ const Birthday = () => {
   const [view, setView] = useState('form'); // 'form' | 'card' | 'greeting'
   const [formData, setFormData] = useState({ name: '', age: '', message: '' });
   const [searchParams] = useSearchParams();
+  const audioRef = useRef(null);
+
+
+   useEffect(() => {
+    if (view !== 'form') {
+      if (!audioRef.current) {
+        const audio = new Audio('/audio/happy-birthday-to-you.mp3');
+        audio.loop = true;
+        audio.play().catch(err => {
+          console.warn('Autoplay estetty:', err);
+        });
+        audioRef.current = audio;
+      } else {
+        audioRef.current.play();
+      }
+    } else {
+      audioRef.current?.pause();
+      audioRef.current = null;
+    }
+
+    return () => {
+      audioRef.current?.pause();
+    };
+  }, [view]);
+
 
   // Tarkista URL-parametrit
   useEffect(() => {

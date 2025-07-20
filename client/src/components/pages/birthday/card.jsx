@@ -3,14 +3,11 @@ import './card.css';
 import { Canvas } from '@react-three/fiber';
 import CakeWithCandle from './cakeWithCandles';
 
-
 const Card = ({ name, age, message, onBlow, blownOut = false }) => {
   useEffect(() => {
-    if (blownOut) return; // Jos jaettu näkymä, ei toisteta audioa tai puhallusta
+    if (blownOut) return; // Jaettu näkymä, ei puhallusta
 
-    const audio = new Audio('/audio/happy-birthday-to-you.mp3');
-    audio.play();
-
+    // 🎤 Mikrofoniäänitason mittaus
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
       const audioCtx = new AudioContext();
       const source = audioCtx.createMediaStreamSource(stream);
@@ -21,11 +18,13 @@ const Card = ({ name, age, message, onBlow, blownOut = false }) => {
       const detect = () => {
         analyser.getByteFrequencyData(data);
         const avg = data.reduce((a, b) => a + b) / data.length;
-        if (avg > 90) onBlow?.(); // Tee puhalluksesta herkempi
+        if (avg > 90) onBlow?.(); // Herkkä puhalluksen tunnistus
         else requestAnimationFrame(detect);
       };
       source.connect(analyser);
       detect();
+    }).catch((err) => {
+      console.warn('Mikrofonin käyttö estetty:', err);
     });
   }, [onBlow, blownOut]);
 
