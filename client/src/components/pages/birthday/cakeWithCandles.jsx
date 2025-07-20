@@ -3,7 +3,7 @@ import { useLoader, useFrame } from '@react-three/fiber';
 import { TextureLoader, RepeatWrapping } from 'three';
 import Candle from './candle';
 
-const CakeWithCandle = ({ blownOut }) => {
+const CakeWithCandle = ({ blownOut ,blowForce}) => {
   const groupRef = useRef();
 
   useFrame(() => {
@@ -16,9 +16,6 @@ const CakeWithCandle = ({ blownOut }) => {
   bowTexture.wrapS = RepeatWrapping;
   bowTexture.repeat.set(9, 1);
 
-  const koruTexture = useLoader(TextureLoader, '/pic/koru.jpg');
-  koruTexture.wrapS = RepeatWrapping;
-  koruTexture.repeat.set(9, 1);
 
   const height = 0.5;
 
@@ -63,6 +60,7 @@ const CakeWithCandle = ({ blownOut }) => {
           color="#ffd1dc"
           roughness={0.6}
           metalness={0.1}
+ 
           
           
         />
@@ -73,34 +71,12 @@ const CakeWithCandle = ({ blownOut }) => {
         <cylinderGeometry args={[1, 1, height, 64]} />
         {[sideMaterialWithBow, topMaterialPlain, bottomMaterialPlain]}
       </mesh>
-
-      {/* ✨ Kimalteet */}
-      {[...Array(30)].map((_, i) => (
-        <mesh
-          key={i}
-          position={[
-            (Math.random() - 0.5) * 3,
-            1 + Math.random() * 1.5,
-            (Math.random() - 0.5) * 3,
-          ]}
-          castShadow
-          receiveShadow
-        >
-          <sphereGeometry args={[0.02, 40, 16]} />
-          <meshStandardMaterial
-            color="#fff"
-            metalness={1}
-            roughness={0}
-            emissive="orange"
-            emissiveIntensity={9}
-          />
-        </mesh>
-      ))}
+  
 
       {/* 🕯️ Kynttilät */}
-      <Candle position={[-0.4, height * 3 + 0.2, 0]} isBlownOut={blownOut} />
-      <Candle position={[0, height * 3 + 0.2, 0]} isBlownOut={blownOut} />
-      <Candle position={[0.4, height * 3 + 0.2, 0]} isBlownOut={blownOut} />
+      <Candle position={[-0.25, height * 3.2 + 0.2, 0]} isBlownOut={blownOut} blowForce={blowForce} />
+      <Candle position={[0, height * 3.2 + 0.2, 0]} isBlownOut={blownOut} blowForce={blowForce} />
+      <Candle position={[0.25, height * 3.2 + 0.2, 0]} isBlownOut={blownOut} blowForce={blowForce} />
     </group>
   );
 };
