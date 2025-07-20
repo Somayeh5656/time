@@ -35,9 +35,9 @@ const Card = ({ name, age, message, onBlow, blownOut = false }) => {
       <Canvas
       style={{ height: '400px' }}
       shadows
-      camera={{ position: [5, 5, 5], fov: 50 }}
+      camera={{ position: [4, 4, 4], fov: 50 }}
     >
-      <ambientLight intensity={1.4} />
+      <ambientLight intensity={1.9} />
       <directionalLight position={[9, 0, 0]} castShadow intensity={1} />
       <OrbitControls />
       <CakeWithCandle blownOut={blownOut} />

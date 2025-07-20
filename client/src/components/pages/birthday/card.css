@@ -19,6 +19,7 @@
 
 .birthday-card canvas {
   border-radius: 12px;
+  padding-top: 20px;
   margin-bottom: 24px;
   background: #ffe0eb; /* tausta kakulle */
   box-shadow: 0 3px 8px rgba(255, 153, 204, 0.3);
