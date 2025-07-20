@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useLoader, useFrame } from '@react-three/fiber';
 import { TextureLoader, RepeatWrapping } from 'three';
-import Candle from './Candle';
+import Candle from './candle';
 
 const CakeWithCandle = ({ blownOut }) => {
   const groupRef = useRef();
