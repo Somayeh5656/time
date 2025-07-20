@@ -8,10 +8,23 @@ const Birthday = () => {
   const [view, setView] = useState('form'); // 'form' | 'card' | 'greeting'
   const [formData, setFormData] = useState({ name: '', age: '', message: '' });
   const [searchParams] = useSearchParams();
+  const [isShared, setIsShared] = useState(false); // onko avattu jaetun linkin kautta
   const audioRef = useRef(null);
 
+  // ⏺️ Tarkista URL-parametrit, jos tullaan jaetulla linkillä
+  useEffect(() => {
+    const name = searchParams.get('name');
+    const age = searchParams.get('age');
+    const message = searchParams.get('message');
+    if (name && age && message) {
+      setFormData({ name, age, message });
+      setIsShared(true);
+      setView('card'); // näytetään kakku heti
+    }
+  }, [searchParams]);
 
-   useEffect(() => {
+  // 🔊 Toista synttäribiisi, kun ei olla form-näkymässä
+  useEffect(() => {
     if (view !== 'form') {
       if (!audioRef.current) {
         const audio = new Audio('/audio/happy-birthday-to-you.mp3');
@@ -33,18 +46,7 @@ const Birthday = () => {
     };
   }, [view]);
 
-
-  // Tarkista URL-parametrit
-  useEffect(() => {
-    const name = searchParams.get('name');
-    const age = searchParams.get('age');
-    const message = searchParams.get('message');
-    if (name && age && message) {
-      setFormData({ name, age, message });
-      setView('shared'); // erityistila jaetulle linkille
-    }
-  }, [searchParams]);
-
+  // 🔤 Lomakekenttien muutos
   const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
@@ -52,30 +54,24 @@ const Birthday = () => {
     }));
   };
 
+  // ✅ Näytä kortti kun lomake lähetetään
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, age, message } = formData;
     if (!name || !age || !message) return;
+    setIsShared(false); // ei jaettu linkki
     setView('card');
   };
 
+  // 🔗 Linkin luonti ja kopio leikepöydälle
   const generateLink = () => {
     const params = new URLSearchParams(formData).toString();
-    const url = `${window.location.origin}/?${params}`;
+    const url = `${window.location.origin}/birthday?${params}`;
     navigator.clipboard.writeText(url);
     alert('Link copied to clipboard!');
   };
 
-  // 🔁 Shared näkymä – ei nappeja
-  if (view === 'shared') {
-    return (
-      <>
-        <Card {...formData} blownOut={true} />
-        <Greeting {...formData} />
-      </>
-    );
-  }
-
+  // 🎂 Kakku-näkymä
   if (view === 'card') {
     return (
       <Card
@@ -86,15 +82,21 @@ const Birthday = () => {
     );
   }
 
+  // 🎉 Tervehdys-näkymä
   if (view === 'greeting') {
     return (
       <Greeting
         {...formData}
-        onBack={() => setView('form')}
+        sharedMode={isShared}
+        onBack={() => {
+          setIsShared(false);
+          setView('form');
+        }}
       />
     );
   }
 
+  // 📝 Lomake (vain jos ei jaettu näkymä)
   return (
     <div className="birthday">
       <h2>🎉 Create Birthday Surprise</h2>
@@ -118,10 +120,8 @@ const Birthday = () => {
           value={formData.message}
           onChange={handleChange}
         />
-        <button type="submit">Show the Demo</button>
-        {view !== 'card' && (
-          <button type="button" onClick={generateLink}>📨 Share the Greeting</button>
-        )}
+        <button type="submit">🎂 Show the Cake</button>
+        <button type="button" onClick={generateLink}>📨 Share the Greeting</button>
       </form>
     </div>
   );
