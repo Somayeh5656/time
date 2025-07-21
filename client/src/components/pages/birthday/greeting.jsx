@@ -8,7 +8,7 @@ import './greeting.css';
 // 🎇 Firework with Instancing
 const Fireworks = () => {
   const instRef = useRef();
-  const count = 1000;
+  const count = 330;
   const dummy = new THREE.Object3D();
   const clock = new THREE.Clock();
 
@@ -35,7 +35,7 @@ const Fireworks = () => {
 
   return (
     <instancedMesh ref={instRef} args={[null, null, count]}>
-      <sphereGeometry args={[0.002, 6, 6]} />
+      <sphereGeometry args={[0.019, 5, 9]} />
       <meshBasicMaterial color="white" transparent opacity={0.8} />
     </instancedMesh>
   );
@@ -77,12 +77,12 @@ const Balloon = ({ position }) => {
           
           thickness={1}
           clearcoat={1}
-          clearcoatRoughness={0}
+          clearcoatRoughness={0.8}
           reflectivity={1}
           envMapIntensity={1}
           color="#f5f5f5"
           roughness={0} 
-          metalness={0.5}
+          metalness={0.4}
           
         />
       </mesh>
@@ -142,7 +142,7 @@ const Scene = () => (
     <Fireworks />
     <Suspense fallback={null}>
 
-      <Environment preset='studio'  backgroundIntensity={1} rotation={[0, Math.PI / 2, 0]} />
+      <Environment files="/pic/puresky.exr" background backgroundIntensity={1} />
     </Suspense>
     <OrbitControls/>
   </>
@@ -162,7 +162,6 @@ const Greeting = ({ name, age, message, onBack, sharedMode = false }) => {
     <div className="after-blow">
       <div className="canvas-container">
         <Canvas camera={{ position: [0, 0, 6], fov: 40 }}
-        style={{ background: '#333' }}
         >
           <Scene />
         </Canvas>
