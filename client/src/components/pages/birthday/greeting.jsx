@@ -8,7 +8,7 @@ import './greeting.css';
 // 🎇 Firework with Instancing
 const Fireworks = () => {
   const instRef = useRef();
-  const count = 330;
+  const count = 340;
   const dummy = new THREE.Object3D();
   const clock = new THREE.Clock();
 
@@ -162,7 +162,7 @@ const Greeting = ({ name, age, message, onBack, sharedMode = false }) => {
     <div className="after-blow">
       <div className="canvas-container">
         <Canvas camera={{ position: [0, 0, 6], fov: 40 }}
-        style={{background: "#e5e8e8"}}
+        style={{background: "#909090"}}
         >
           <Scene />
         </Canvas>
