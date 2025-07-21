@@ -80,7 +80,7 @@ const Balloon = ({ position }) => {
           clearcoatRoughness={0.8}
           reflectivity={1}
           envMapIntensity={1}
-          color="#f5f5f5"
+          color="#a6a6a6"
           roughness={0} 
           metalness={0.4}
           
@@ -90,7 +90,7 @@ const Balloon = ({ position }) => {
       {/* Curved string */}
       <line ref={curveRef}>
         <bufferGeometry />
-        <lineBasicMaterial color="#cccccc" />
+        <lineBasicMaterial color="#aaa" />
       </line>
     </group>
   );
@@ -142,7 +142,7 @@ const Scene = () => (
     <Fireworks />
     <Suspense fallback={null}>
 
-      <Environment files="/pic/puresky.exr" background backgroundIntensity={1} />
+      <Environment preset="studio"  backgroundIntensity={1} rotation={[0, Math.PI / 2, 0]}/>
     </Suspense>
     <OrbitControls/>
   </>
@@ -162,6 +162,7 @@ const Greeting = ({ name, age, message, onBack, sharedMode = false }) => {
     <div className="after-blow">
       <div className="canvas-container">
         <Canvas camera={{ position: [0, 0, 6], fov: 40 }}
+        style={{background: "#e5e8e8"}}
         >
           <Scene />
         </Canvas>
