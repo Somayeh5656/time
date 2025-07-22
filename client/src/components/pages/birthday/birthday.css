@@ -48,3 +48,36 @@
   background-color: rgb(242, 187, 215);
   color: white;
 }
+
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.intro-video {
+  width: 100%;
+  max-width: 640px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.start-btn {
+  margin-top: 1rem;
+  padding: 0.4rem 0.4rem;
+  font-size: 1rem;
+  background:  #efcdd9;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.start-btn:hover {
+  background: #fcb6cf;
+}

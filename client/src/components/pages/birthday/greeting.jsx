@@ -8,7 +8,7 @@ import './greeting.css';
 // 🎇 Firework with Instancing
 const Fireworks = () => {
   const instRef = useRef();
-  const count = 340;
+  const count = 400;
   const dummy = new THREE.Object3D();
   const clock = new THREE.Clock();
 
