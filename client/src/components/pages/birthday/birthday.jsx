@@ -44,7 +44,7 @@ const Birthday = () => {
 
     if (view === 'greeting') {
       if (!greetingAudioRef.current) {
-        const audio = new Audio('/audio/greeting-theme.mp3');
+        const audio = new Audio('/audio/happy-birthday-laura.mp3');
         audio.loop = true;
         audio.play().catch(console.warn);
         greetingAudioRef.current = audio;
