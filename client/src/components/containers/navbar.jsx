@@ -76,7 +76,7 @@ const Navbar = ({loggedIn,setLoggedIn}) => {
              <li><Link to="/diary" onClick={()=> setMenuOpen(false)}>Diary</Link></li>
 
             <li><Link to="/emotionReview" onClick={()=> setMenuOpen(false)}>Mood Tracker</Link></li>
-            <li><Link to ="/birthday">Birthday Wishes</Link></li>
+            <li><Link to ="/birthday" onClick={()=>setMenuOpen(false)}>Birthday Wishes</Link></li>
             {loggedIn ? (
            <li><Link to="/account" className="logout-btn" onClick={()=>{handleLogout();toggleMenu();}}>Sign Out</Link ></li>
         ) : (
