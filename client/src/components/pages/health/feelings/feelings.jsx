@@ -48,7 +48,7 @@ const Feelings=({onBack, onSelectEmotion})=> {
         <IoIosArrowBack />
 
       </div>
-      <div className="canvas-container">
+      <div className="emotion-canvas-container">
         <Canvas camera={{position:[0,0,3], fov:90}}>
           <ambientLight intensity={2} />
           <StarDust emotion={emotion}/>
