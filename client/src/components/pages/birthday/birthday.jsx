@@ -106,10 +106,7 @@ const Birthday = () => {
           autoPlay
           muted
           playsInline
-          onEnded={() => {
-            
-            setView('card');
-          }}
+          loop
           className="intro-video"
         />
         <button
