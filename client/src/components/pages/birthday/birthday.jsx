@@ -102,7 +102,7 @@ const Birthday = () => {
     return (
       <div className="start-overlay">
         <video
-          src="/audio/sininen.mp4"
+          src="/audio/blonde.mp4"
           autoPlay
           muted
           playsInline
