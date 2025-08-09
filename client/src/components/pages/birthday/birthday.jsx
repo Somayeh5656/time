@@ -112,7 +112,7 @@ const Birthday = () => {
         {...formData}
         blownOut={false}
         onBlow={() => {
-          cakeAudioRef.current?.pause();
+          
           setView('greeting');
         }}
       />
