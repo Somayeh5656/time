@@ -37,7 +37,7 @@ const Birthday = () => {
     greetingAudioRef.current.currentTime = 0;
   }
 
-  if (view === 'card') {
+  if (view === 'card' && view==='greeting') {
     const audio = new Audio('/audio/happy-birthday-to-you.mp3');
     audio.loop = true;
     audio.currentTime = 0;
@@ -45,27 +45,10 @@ const Birthday = () => {
     cakeAudioRef.current = audio;
   }
 
-  if (view === 'greeting') {
-    const audio = new Audio('/audio/happy-birthday-laura.mp3');
-    audio.loop = true;
-    audio.currentTime = 6;
-    audio.play().catch(console.warn);
-    greetingAudioRef.current = audio;
-
-    setTimeout(() => {
-      audio.pause();
-      audio.currentTime = 0;
-    }, 70 * 1000);
-  }
-
   return () => {
     if (cakeAudioRef.current) {
       cakeAudioRef.current.pause();
       cakeAudioRef.current.currentTime = 0;
-    }
-    if (greetingAudioRef.current) {
-      greetingAudioRef.current.pause();
-      greetingAudioRef.current.currentTime = 0;
     }
   };
 }, [view]);
@@ -102,7 +85,7 @@ const Birthday = () => {
     return (
       <div className="start-overlay">
         <video
-          src="/audio/blonde.mp4"
+          src="/audio/doodles.mp4"
           autoPlay
           muted
           playsInline
